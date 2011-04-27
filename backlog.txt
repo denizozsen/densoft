@@ -1,0 +1,17 @@
+TO DO
+
+- Create MasterRepository (instead of EntityLocator)
+- Create TaskRepository
+- Create CachedRepository
+  -> two choices as cache: 1) request-level cache (context) 2) real cache (memcache)
+- Make Router a singleton
+- Make Router manage some state
+  -> the current request
+  -> ordered list of all modules taking part in requests
+     -> modules must register themselves as taking part in requests
+- Make default error pages work (e.g. for invalid image paths)
+
+--------------------------
+
+DONE
+

@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+
+/* General */
+body { background-color: #DDFFDD; font-family: Arial, Helvetica; }
+
+/* Inner Body Wrapper */
+#innerbody { margin: 2em auto; width: 950px; position: relative; 
+             background-color: white; border: ridge #AABBFF 4px; }
+
+/* Site Logo */
+#sitelogo { padding: 0; margin: 15px 25px 0 15px; }
+
+/* Top Bar */
+#topbar { padding: 0 0 0 0; margin: 5px 25px 0 15px;
+          background: url("/themes/basic/top_bar_bg.gif") repeat-x 0% 100%; }
+
+/* Heading */
+#heading     { margin-left: 270px; }
+
+/* Breadcrumbs */
+#breadcrumbs { margin: 25px 15px 0 270px; }
+
+/* Content */
+#content     { margin-left: 270px; }
+
+/* Navigation Links */
+#navbar      { position: absolute; top: 10em; left: 1em; width: 220px;
+               border: solid black 1px; }
+#navbar ul   { list-style: none; padding-left: 1em; }
+#navbar li   { list-style-image: none; }
+#navbar a    { text-decoration: none; color: #445599; }
+#navbar a:hover                  { text-decoration: underline; color: #6677DD; }
+#navbar li.activenavlink a       { color: #6677DD; font-weight: bold; }
+#navbar li.activenavlink a:hover { text-decoration: none; }
+
+/* Footer */
+#footer      { margin: 0 25px 25px 270px;
+               font-size: small; font-family: monospace;
+               border-top: solid #999999 1px; }
