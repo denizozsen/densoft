@@ -1,21 +1,5 @@
 <?php
 
-//
-//
-//
-// Some additional stuff only on the branch
-//
-//
-//
-
-
-
-
-
-
-
-
-
 // Make sure WebApplication instance is created and initialised
 // NOTE: It's necessary that this is done before any other code is run,
 //       so that certain things are set up, such as the include path.
