@@ -1,5 +1,16 @@
 <?php
 
+// Make sure WebApplication instance is created and initialised
+// NOTE: It's necessary that this is done before any other code is run,
+//       so that certain things are set up, such as the include path.
+require_once 'system/core/Application.php';
+require_once 'system/web/WebApplication.php';
+require_once 'config/Configuration.php';
+require_once 'config/LocalConfiguration.php';
+require_once 'config/TestConfiguration.php';
+require_once 'config/LiveConfiguration.php';
+system_web_WebApplication::getInstance();
+
 // Define class auto-loader function
 // The auto-loader expects that class names match the full path of the file
 // in which they are declared, with slashes replaced by underscores, e.g.
@@ -14,11 +25,6 @@ function __autoload($className)
 		throw new system_core_ClassNotFoundException();
 	}
 }
-
-// Make sure Application instance is created and initialised
-// NOTE: It's necessary that this is done before any other code is run,
-//       so that certain things are set up, such as the include path.
-system_core_Application::getInstance();
 
 // Obtain request path
 $requestPath = $_SERVER['REDIRECT_URL'];
