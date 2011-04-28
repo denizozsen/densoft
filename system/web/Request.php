@@ -5,6 +5,7 @@ class system_web_Request
     private $page;
     private $parameters;
 
+    // TODO - finish implementation of and test request contributions
     private $contributions;
 
     public static function createFromCurrentRequest()

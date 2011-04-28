@@ -7,7 +7,7 @@
  */
 class system_web_Router
 {
-    // TODO - make system_web_Router a singleton and let it manage state such as: the current request, (ordered) list of modules participating in requests (they must register themselves somehow)
+    // TODO - system_web_Router: impleent createRequest() that creates a Request object based on the current request parameters
 	// TODO - should getScriptForRequest throw Exception instead of returning false, if no match found
 
 	/**
