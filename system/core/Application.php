@@ -1,14 +1,14 @@
 <?php
 
 /**
- * The application performs application initialisation, such as connecting to
- * the database, and holds application state.
+ * The application-level container for fundamental objects, such as the database
+ * API, and performs application-level initialisation.
  *
  * @author Deniz Ozsen
  */
 class system_core_Application
 {
-	private static $instance;
+	protected static $instance;
 
 	private $db;
 	private $masterRepository;
@@ -18,8 +18,8 @@ class system_core_Application
 	 * 
 	 * Note: <code>getInstance()</code> also performs application-level
 	 * initialisation, on the first call. This must be done near the start of
-	 * the application entry-point, so that certain inistialisation is done
-	 * before executing other code, such as setting the include path.
+	 * the application entry-point, so that certain initialisation (such as
+	 * setting the include path) is done before executing other code.
 	 */
 	public static function getInstance()
 	{
@@ -53,7 +53,7 @@ class system_core_Application
 		return $this->masterRepository;
 	}
 
-	private function __construct()
+	protected function __construct()
 	{
 		$this->initialise();
 	}
