@@ -9,7 +9,7 @@ provides the following features:
 - simple templating and theming mechanisms
 - a default class auto-loader
 - a lazily-loaded database connection
-- and more...
+- and more.....
 
 
 DEPENDENCIES
