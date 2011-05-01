@@ -7,16 +7,25 @@
  */
 class system_web_Page
 {
+	private $markupTemplateFile;
+	private $regionControllers = array();
+
 	protected $title = '[untitled]';
 	protected $themeCss;
 	protected $otherCssList   = array();
 	protected $javascriptList = array();
 
-	private $markupTemplateFile;
-
 	public function __construct($markupTemplateFile)
 	{
 		$this->markupTemplateFile = $markupTemplateFile;
+
+		$this->regionControllers = array();
+		$this->regionControllers[system_web_PageArea::CONTENT] = null;
+		$this->regionControllers[system_web_PageArea::CONTENT] = null;
+		$this->regionControllers[system_web_PageArea::CONTENT] = null;
+		$this->regionControllers[system_web_PageArea::CONTENT] = null;
+		$this->regionControllers[system_web_PageArea::CONTENT] = null;
+		$this->regionControllers[system_web_PageArea::CONTENT] = null;
 
 		// Set default theme CSS path, if set in Configuration)
 		if (!is_null(config_Configuration::THEME_PATH)) {
