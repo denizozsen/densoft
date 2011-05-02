@@ -7,6 +7,8 @@
  */
 class system_web_Router
 {
+	const FRONT_DIR = 'front/';
+
     // TODO - system_web_Router: impleent createRequest() that creates a Request object based on the current request parameters
 	// TODO - should getScriptForRequest throw Exception instead of returning false, if no match found
 
@@ -37,7 +39,7 @@ class system_web_Router
 		}
 
 		// If no match in configuration, check if file exists in pages folder
-		$pathInPagesFolder = "pages/{$firstRequestSpecElement}.php";
+		$pathInPagesFolder = self::FRONT_DIR . "{$firstRequestSpecElement}.php";
 		if (file_exists($pathInPagesFolder)) {
 			return $pathInPagesFolder;
 		}
