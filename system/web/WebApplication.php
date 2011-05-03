@@ -10,11 +10,11 @@ class system_web_WebApplication extends system_core_Application
 	//protected static $instance;
 	
 	private $request;
-	private $response; // TODO - implement response object (do we need one??)
+	private $page;
 
 	/**
 	 * Retrieves the singleton WebApplication instance.
-	 * 
+	 *
 	 * Note: <code>getInstance()</code> also performs web-level and
 	 * application-level initialisation, on the first call. This must be done
 	 * near the start of the web application's entry-point or bootstrapper, so
@@ -33,19 +33,19 @@ class system_web_WebApplication extends system_core_Application
 	public function getRequest()
 	{
 		if (is_null($this->request)) {
-			$this->request = null; // TODO - initialise request object
+			$this->request = system_web_Request::createFromCurrentRequest();
 		}
 
 		return $this->request;
 	}
 
-	public function getResponse()
+	public function getPage()
 	{
-		if (is_null($this->response)) {
-			$this->response = null; // TODO - initialise response object??
+		if (is_null($this->page)) {
+			$this->page = new system_web_Page();
 		}
 
-		return $this->response;
+		return $this->page;
 	}
 
 	protected function __construct()

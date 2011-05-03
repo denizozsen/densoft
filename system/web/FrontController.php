@@ -1,44 +1,53 @@
 <?php
 
+/**
+ * TODO - document class system_web_FrontController
+ *
+ * @author studio
+ */
 abstract class system_web_FrontController
 {
-	public function setRequest(system_web_Request $request)
+    private $request;
+    
+    public function __construct(system_web_Request $request)
+	{
+        $this->request = $request;
+	}
+    
+	public final function getRequest()
+	{
+	    return $this->request;
+	}
+    
+	/**
+	 * Called by framework when it is time to add controllers to the
+	 * current request's page.
+	 *
+	 * This method is meant to be overridden. The base-class implementation
+	 * of this method does not do anything.
+	 */
+	protected function addControllers()
 	{
 
 	}
-
-	public function addControllers()
+    
+	protected function preHandleActions()
 	{
 
 	}
-
-	public function preHandleActions()
+    
+	protected function postHandleActions()
 	{
 
 	}
-
-	public function postHandleActions()
+    
+	protected function preRender()
 	{
 
 	}
-
-	public function preRender()
+    
+	protected function postRender($html)
 	{
 
-	}
-
-	public function postRender($html)
-	{
-
-	}
-
-	public /*final*/ addController($pageRegion, system_mvc_controller $controller)
-	{
-		// TODO - implement addController
-	}
-
-	public /*final*/ getControllers($pageRegion)
-	{
-		// TODO - implement getControllers
 	}
 }

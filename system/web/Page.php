@@ -3,29 +3,28 @@
 /**
  * Base page implementation.
  *
- * @author Deniz …zsen
+ * @author Deniz Ozsen
  */
 class system_web_Page
 {
-	private $markupTemplateFile;
 	private $regionControllers = array();
+	private $templateFile;
 
 	protected $title = '[untitled]';
 	protected $themeCss;
 	protected $otherCssList   = array();
 	protected $javascriptList = array();
 
-	public function __construct($markupTemplateFile)
+	public function __construct()
 	{
-		$this->markupTemplateFile = $markupTemplateFile;
-
 		$this->regionControllers = array();
-		$this->regionControllers[system_web_PageArea::CONTENT] = null;
-		$this->regionControllers[system_web_PageArea::CONTENT] = null;
-		$this->regionControllers[system_web_PageArea::CONTENT] = null;
-		$this->regionControllers[system_web_PageArea::CONTENT] = null;
-		$this->regionControllers[system_web_PageArea::CONTENT] = null;
-		$this->regionControllers[system_web_PageArea::CONTENT] = null;
+		$this->regionControllers[system_web_PageArea::CONTENT]      = array();
+		$this->regionControllers[system_web_PageArea::HEADING]      = array();
+		$this->regionControllers[system_web_PageArea::TOP_BAR]      = array();
+		$this->regionControllers[system_web_PageArea::MAIN_NAV]     = array();
+		$this->regionControllers[system_web_PageArea::LEFT_COLUMN]  = array();
+		$this->regionControllers[system_web_PageArea::RIGHT_COLUMN] = array();
+		$this->regionControllers[system_web_PageArea::FOOTER]       = array();
 
 		// Set default theme CSS path, if set in Configuration)
 		if (!is_null(config_Configuration::THEME_PATH)) {
@@ -33,6 +32,33 @@ class system_web_Page
 				config_Configuration::getInstance()->getRootUrl()
 					. config_Configuration::THEME_PATH;
 		}
+	}
+
+	public function addController($pageRegion, system_mvc_Controller $controller)
+	{
+	    if (!array_key_exists($pageRegion, $this->regionControllers)) {
+	        throw new Exception("Unknown page region: {$pageRegion}"); // TODO - throw specific exception
+	    }
+
+	    $this->regionControllers[$pageRegion] = $controller;
+	}
+
+	public function getControllers($pageRegion = null)
+	{
+	    if (!is_null($pageRegion)) {
+	        return $this->regionControllers[$pageRegion];
+	    } else {
+	        $allControllers = array();
+	        foreach($this->regionControllers as $controllersForRegion) {
+	            array_merge($allControllers, $controllersForRegion);
+	        }
+	        return $allControllers;
+	    }
+	}
+
+	public function setTemplate($templateFile)
+	{
+		$this->templateFile = $templateFile;
 	}
 
 	public function setPageTitle($title)
