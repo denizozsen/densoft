@@ -1,8 +1,13 @@
 <?php 
 
-$dummy = "Hello, PHP World!";
+echo '<p>Hi</p>';
+
+$dummy = "<p>Hello, PHP World!</p>";
 $another = 3;
-echo "Interpolation: {$dummy} Number: {$another}"
+echo "<p>Interpolation: {$dummy} Number: {$another}</p>"
+
+$currentPath = realpath('.');
+echo "<p>Current absolute path: {$currentPath}</p>";
 
 ?>
 
