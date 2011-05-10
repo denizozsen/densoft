@@ -4,7 +4,7 @@ echo '<p>Hi</p>';
 
 $dummy = "<p>Hello, PHP World!</p>";
 $another = 3;
-echo "<p>Interpolation: {$dummy} Number: {$another}</p>"
+echo "<p>Interpolation: {$dummy} Number: {$another}</p>";
 
 $currentPath = realpath('.');
 echo "<p>Current absolute path: {$currentPath}</p>";
