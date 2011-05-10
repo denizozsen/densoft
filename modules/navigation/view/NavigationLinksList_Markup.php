@@ -8,7 +8,7 @@
 				<a href="<?php echo $link->getUrl(); ?>"><?php echo $link->getTitle(); ?></a>
 			</li>
 		<?php if ($link->hasChildren()) : ?>
-		<ul>
+		<li><ul>
 			<?php foreach($link->getChildren() as $childLink) :
 				if ($childLink->isActive()) : ?>
 					<li class="activenavlink">
@@ -18,7 +18,7 @@
 						<a href="<?php echo $childLink->getUrl(); ?>"><?php echo $childLink->getTitle(); ?></a>
 					</li>
 			<?php endforeach; ?>
-		</ul>
+		</ul></li>
 		<?php endif; ?>
 	<?php endforeach; ?>
 </ul>
