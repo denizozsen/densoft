@@ -38,10 +38,16 @@ class system_mvc_CompositeController extends system_mvc_Controller
 
     public function renderView()
     {
-        foreach($this->childControllers as $child) {
-        	echo '<div>' . PHP_EOL;
-        	$child->renderView();
-        	echo '</div>' . PHP_EOL;
+        // If we have only one child, render it, otherwise render each
+        // child in its own div
+        if (count($this->childControllers) == 1) {
+            $this->childControllers[0]->renderView();
+        } else {
+            foreach($this->childControllers as $child) {
+            	echo '<div>' . PHP_EOL;
+            	$child->renderView();
+            	echo '</div>' . PHP_EOL;
+            }
         }
     }
 }
