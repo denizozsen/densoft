@@ -18,13 +18,13 @@ class system_web_Page
 	public function __construct()
 	{
 		$this->regionControllers = array();
-		$this->regionControllers[system_web_PageArea::CONTENT]      = array();
-		$this->regionControllers[system_web_PageArea::HEADING]      = array();
-		$this->regionControllers[system_web_PageArea::TOP_BAR]      = array();
-		$this->regionControllers[system_web_PageArea::MAIN_NAV]     = array();
-		$this->regionControllers[system_web_PageArea::LEFT_COLUMN]  = array();
-		$this->regionControllers[system_web_PageArea::RIGHT_COLUMN] = array();
-		$this->regionControllers[system_web_PageArea::FOOTER]       = array();
+		$this->regionControllers[system_web_PageArea::CONTENT]      = new system_mvc_CompositeController();
+		$this->regionControllers[system_web_PageArea::HEADING]      = new system_mvc_CompositeController();
+		$this->regionControllers[system_web_PageArea::TOP_BAR]      = new system_mvc_CompositeController();
+		$this->regionControllers[system_web_PageArea::MAIN_NAV]     = new system_mvc_CompositeController();
+		$this->regionControllers[system_web_PageArea::LEFT_COLUMN]  = new system_mvc_CompositeController();
+		$this->regionControllers[system_web_PageArea::RIGHT_COLUMN] = new system_mvc_CompositeController();
+		$this->regionControllers[system_web_PageArea::FOOTER]       = new system_mvc_CompositeController();
 
 		// Set default theme CSS path, if set in Configuration)
 		if (!is_null(config_Configuration::THEME_PATH)) {
@@ -40,19 +40,26 @@ class system_web_Page
 	        throw new Exception("Unknown page region: {$pageRegion}"); // TODO - throw specific exception
 	    }
 
-	    $this->regionControllers[$pageRegion] = $controller;
+	    $this->regionControllers[$pageRegion]->addChildController($controller);
 	}
 
 	public function getControllers($pageRegion = null)
 	{
 	    if (!is_null($pageRegion)) {
+            
+    	    if (!array_key_exists($pageRegion, $this->regionControllers)) {
+    	        throw new Exception("Unknown page region: {$pageRegion}"); // TODO - throw specific exception
+    	    }
 	        return $this->regionControllers[$pageRegion];
+            
 	    } else {
+	        
 	        $allControllers = array();
 	        foreach($this->regionControllers as $controllersForRegion) {
 	            array_merge($allControllers, $controllersForRegion);
 	        }
 	        return $allControllers;
+	        
 	    }
 	}
 
@@ -81,7 +88,19 @@ class system_web_Page
 		$this->javascriptList[] = $javascript;
 	}
 
-	public function renderHead()
+	public function render()
+	{
+	    $content     = $this->regionControllers[system_web_PageArea::CONTENT];
+	    $footer      = $this->regionControllers[system_web_PageArea::FOOTER];
+	    $heading     = $this->regionControllers[system_web_PageArea::HEADING];
+	    $leftColumn  = $this->regionControllers[system_web_PageArea::LEFT_COLUMN];
+	    $mainNav     = $this->regionControllers[system_web_PageArea::MAIN_NAV];
+	    $rightColumn = $this->regionControllers[system_web_PageArea::RIGHT_COLUMN];
+	    $topBar      = $this->regionControllers[system_web_PageArea::TOP_BAR];
+	    include($this->markupTemplateFile);
+	}
+	
+	protected function renderHead()
 	{
 		// Starting tag for head, meta and title tags
 		$head = '<head>' . PHP_EOL;
@@ -112,10 +131,5 @@ class system_web_Page
 
 		// Render complete head element
 		echo $head;
-	}
-
-	public function render()
-	{
-		include($this->markupTemplateFile);
 	}
 }
