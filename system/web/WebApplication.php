@@ -7,8 +7,6 @@
  */
 class system_web_WebApplication extends system_core_Application
 {
-	//protected static $instance;
-	
 	private $request;
 	private $page;
 
@@ -51,11 +49,5 @@ class system_web_WebApplication extends system_core_Application
 	protected function __construct()
 	{
 		parent::__construct();
-		$this->initialise();
-	}
-
-	private function initialise()
-	{
-		// TODO - do we need any web-level initialisation??
 	}
 }

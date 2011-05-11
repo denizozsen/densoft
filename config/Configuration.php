@@ -10,7 +10,8 @@ abstract class config_Configuration
 	const URL_PREFIX_LOCAL = 'local';
 	const URL_PREFIX_TEST  = 'test';
 
-	const HOMEPAGE_SCRIPT_PATH = 'pages/tasklist.php';
+	const HANDLERS_DIR         = 'handlers/';
+	const HOMEPAGE_SCRIPT_PATH = 'handlers/tasklist.php';
 	const SITE_NAME            = 'Home Monitor';
 	const THEME_PATH           = 'themes/basic/theme.css';
 	const COPANY_LOGO_PATH     = 'themes/basic/company_logo.gif';

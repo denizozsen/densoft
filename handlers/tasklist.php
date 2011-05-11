@@ -43,6 +43,7 @@ $page->setPageTitle('Task List - ' . config_Configuration::SITE_NAME);
 $page->setPageHeading('Task List');
 $page->addContentColumnController(new system_web_StaticController($content));
 $page->addNavbarColumnController($navbarController);
+$page->setTemplate('templates/templates_TwoColumns_Markup.php');
 
 // Render page
 $page->render();

@@ -1,31 +1,13 @@
 <?php
 
-// TODO - Avoid require'ing each specific Configuration sub-class
+// Perform bootstrapping, such as setting up the include path and error handlers
+include 'system/core/bootstrap.php';
+
 // Make sure WebApplication instance is created and initialised
 // NOTE: It's necessary that this is done before any other code is run,
-//       so that certain things are set up, such as the include path.
-require_once 'system/core/Application.php';
-require_once 'system/web/WebApplication.php';
-require_once 'config/Configuration.php';
-require_once 'config/LocalConfiguration.php';
-require_once 'config/TestConfiguration.php';
-require_once 'config/LiveConfiguration.php';
+//       to make sure that we are using a 'system_web_WebApplication' and not
+//       just a plain 'system_core_Application'.
 system_web_WebApplication::getInstance();
-
-// Define class auto-loader function
-// The auto-loader expects that class names match the full path of the file
-// in which they are declared, with slashes replaced by underscores, e.g.
-// class system_core_Application is declared in file system/core/Application.php
-require_once 'system/core/ClassNotFoundException.php';
-function __autoload($className)
-{
-	$pathToClassFile = str_replace('_', '/', $className) . '.php';
-	if (file_exists($pathToClassFile)) {
-		require($pathToClassFile);
-	} else {
-		throw new system_core_ClassNotFoundException();
-	}
-}
 
 // Obtain request path
 $requestPath = $_SERVER['REDIRECT_URL'];
@@ -37,5 +19,5 @@ $scriptPath = system_web_Router::getScriptForRequest($requestPath);
 if ($scriptPath !== false) {
 	include($scriptPath);
 } else {
-	include 'pages/404.php';
+	include 'handlers/404.php';
 }
