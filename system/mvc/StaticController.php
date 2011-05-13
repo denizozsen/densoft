@@ -17,7 +17,7 @@ class system_mvc_StaticController extends system_mvc_Controller
     /**
      * Renders the view managed by this controller.
      */
-    public function renderView()
+    public function render()
     {
         echo $this->staticContent;
     }

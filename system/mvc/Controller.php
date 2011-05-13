@@ -17,9 +17,9 @@ abstract class system_mvc_Controller
     }
 
     /**
-     * Renders the view managed by this controller.
+     * Renders the view(s) managed by this controller.
      */
-    public function renderView()
+    public function render()
     {
         // default behaviour: render nothing
     }

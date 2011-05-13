@@ -38,12 +38,12 @@ EOF;
 /////////////////////////////////////////////////////////////////////
 
 // Instantiate page and set parameters
-$page = new templates_TwoColumns();
-$page->setPageTitle('Task List - ' . config_Configuration::SITE_NAME);
-$page->setPageHeading('Task List');
-$page->addContentColumnController(new system_web_StaticController($content));
-$page->addNavbarColumnController($navbarController);
-$page->setTemplate('templates/templates_TwoColumns_Markup.php');
+$page = new system_web_Page();
+$page->setTitle('Task List - ' . config_Configuration::SITE_NAME);
+$page->setMainHeading('Task List');
+$page->addController(system_web_PageArea::CONTENT, new system_mvc_StaticController($content));
+$page->addController(system_web_PageArea::MAIN_NAV, $navbarController);
+$page->setTemplate('templates/TwoColumns_Markup.php');
 
 // Render page
 $page->render();

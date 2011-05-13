@@ -7,7 +7,7 @@ class modules_tasks_TaskListController
         // TODO - implement
     }
 
-    public function renderView()
+    public function render()
     {
         // TODO - implement
     }	

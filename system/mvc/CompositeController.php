@@ -8,7 +8,7 @@
 class system_mvc_CompositeController extends system_mvc_Controller
 {
 	private $childControllers;
-
+	
 	/**
 	 * Creates a new composite controller, with constructor arguments used
 	 * as children.
@@ -18,36 +18,49 @@ class system_mvc_CompositeController extends system_mvc_Controller
 	public function __construct()
 	{
 		$this->childControllers = array();
-
+		
 		foreach(func_get_args() as $childController) {
+			// Ensure argument is a controller
+			if (!($childController instanceof system_mvc_Controller)) {
+				$actualType = get_class($childController)
+					? get_class($childController) : gettype($childController);
+				throw new InvalidArgumentException(
+					"Expected argument of type system_mvc_Controller, but was: {$actualType}");
+			}
+			
+			// Add argument to list of child controllers
 			$this->addChildController($childController);
 		}
 	}
-
+	
 	public function addChildController($childController)
 	{
 		$this->childControllers[] = $childController;
 	}
-
+	
     public function handleActions()
     {
         foreach($this->childControllers as $child) {
         	$child->handleActions();
         }
     }
-
-    public function renderView()
+	
+    public function render()
     {
-        // If we have only one child, render it, otherwise render each
-        // child in its own div
-        if (count($this->childControllers) == 1) {
-            $this->childControllers[0]->renderView();
-        } else {
-            foreach($this->childControllers as $child) {
-            	echo '<div>' . PHP_EOL;
-            	$child->renderView();
-            	echo '</div>' . PHP_EOL;
-            }
+        switch(count($this->childControllers))
+        {
+        	case 0: // if no children, do not render anything
+        		break;
+        	case 1: // if one child, render it, without enclosing it with any other tag
+            	$this->childControllers[0]->render();
+        		break;
+        	default: // if multiple children, enclose each child with a div
+            	foreach($this->childControllers as $child) {
+            		echo '<div>' . PHP_EOL;
+            		$child->render();
+            		echo '</div>' . PHP_EOL;
+            	}
+        		break;
         }
     }
 }

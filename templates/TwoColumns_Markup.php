@@ -1,40 +1,40 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 
-<?php $this->renderHead(); ?>
+<?php echo $headElement ?>
 
 <body>
 
 	<div id="innerbody">
 
 		<div id="sitelogo">
-			<?php echo $this->siteLogo; ?>
+			<?php echo $siteLogo; ?>
 		</div>
 
 		<div id="topbar">
-			<?php $this->topBarController->renderView(); ?>
+			<?php $topBar->render(); ?>
 		</div>
 
 		<div id="breadcrumbs">
-			<?php echo $this->breadcrumbs; ?>
+			<?php echo $breadcrumbs; ?>
 		</div>
-	
+
 		<div id="heading">
-			<h1><?php echo $this->pageHeading; ?></h1>
+			<h1><?php echo $mainHeading ?></h1>
 		</div>
-	
+
 		<div id="content">
-			<?php $this->contentColumnController->renderView(); ?>
+			<?php $content->render(); ?>
 		</div>
-	
+
 		<div id="footer">
-			<?php echo $this->footer; ?>
+			<?php $footer->render(); ?>
 		</div>
 
 		<div id="navbar">
-			<?php $this->navbarColumnController->renderView(); ?>
+			<?php $mainNav->render(); ?>
 		</div>
-	
+
 	</div>
 
 </body>

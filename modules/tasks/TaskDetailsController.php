@@ -27,7 +27,7 @@ class modules_tasks_TaskDetailsController extends system_web_Controller
         // TODO - implement
     }
 
-    public function renderView()
+    public function render()
     {
         // TODO - implement
     }
