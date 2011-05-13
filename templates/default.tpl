@@ -8,15 +8,15 @@
 	<div id="innerbody">
 
 		<div id="sitelogo">
-			<?php echo $siteLogo; ?>
+			<?php echo $siteLogo ?>
 		</div>
 
 		<div id="topbar">
-			<?php $topBar->render(); ?>
+			<?php $topBar->render() ?>
 		</div>
 
 		<div id="breadcrumbs">
-			<?php echo $breadcrumbs; ?>
+			<?php echo $breadcrumbs ?>
 		</div>
 
 		<div id="heading">
@@ -24,15 +24,15 @@
 		</div>
 
 		<div id="content">
-			<?php $content->render(); ?>
+			<?php $content->render() ?>
 		</div>
 
 		<div id="footer">
-			<?php $footer->render(); ?>
+			<?php $footer->render() ?>
 		</div>
 
 		<div id="navbar">
-			<?php $mainNav->render(); ?>
+			<?php $mainNav->render() ?>
 		</div>
 
 	</div>

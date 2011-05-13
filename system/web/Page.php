@@ -5,10 +5,9 @@
  *
  * @author Deniz Ozsen
  */
-class system_web_Page
+class system_web_Page extends system_mvc_View
 {
 	private $regionControllers = array();
-	private $templateFile;
 
 	protected $title = '[untitled]';
 	protected $mainHeading;
@@ -66,11 +65,6 @@ class system_web_Page
 	    }
 	}
 
-	public function setTemplate($templateFile)
-	{
-		$this->templateFile = $templateFile;
-	}
-
 	public function setTitle($title)
 	{
 		$this->title = $title;
@@ -106,23 +100,25 @@ class system_web_Page
 		$this->javascriptList[] = $javascript;
 	}
 
-	public function render()
+	public function render(array $renderArgs = array())
 	{
 		// Save data required by template into local variables, which will
 		// be accessible by the template (included below)
-		$mainHeading = $this->mainHeading;
-		$siteLogo    = $this->siteLogo;
-		$breadcrumbs = $this->breadcrumbs;
-		$headElement = $this->generateHeadElement();
-	    $content     = $this->regionControllers[system_web_PageArea::CONTENT];
-	    $footer      = $this->regionControllers[system_web_PageArea::FOOTER];
-	    $heading     = $this->regionControllers[system_web_PageArea::HEADING];
-	    $leftColumn  = $this->regionControllers[system_web_PageArea::LEFT_COLUMN];
-	    $mainNav     = $this->regionControllers[system_web_PageArea::MAIN_NAV];
-	    $rightColumn = $this->regionControllers[system_web_PageArea::RIGHT_COLUMN];
-	    $topBar      = $this->regionControllers[system_web_PageArea::TOP_BAR];
+		$pageRenderArgs = array(
+		'mainHeading' => $this->mainHeading,
+		'siteLogo'    => $this->siteLogo,
+		'breadcrumbs' => $this->breadcrumbs,
+		'headElement' => $this->generateHeadElement(),
+		'content'     => $this->regionControllers[system_web_PageArea::CONTENT],
+	    'footer'      => $this->regionControllers[system_web_PageArea::FOOTER],
+	    'heading'     => $this->regionControllers[system_web_PageArea::HEADING],
+	    'leftColumn'  => $this->regionControllers[system_web_PageArea::LEFT_COLUMN],
+	    'mainNav'     => $this->regionControllers[system_web_PageArea::MAIN_NAV],
+	    'rightColumn' => $this->regionControllers[system_web_PageArea::RIGHT_COLUMN],
+	    'topBar'      => $this->regionControllers[system_web_PageArea::TOP_BAR]
+		);
 	    
-	    include($this->templateFile);
+	    parent::render($pageRenderArgs);
 	}
 	
 	private function generateHeadElement()

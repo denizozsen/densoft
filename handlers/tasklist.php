@@ -43,7 +43,16 @@ $page->setTitle('Task List - ' . config_Configuration::SITE_NAME);
 $page->setMainHeading('Task List');
 $page->addController(system_web_PageArea::CONTENT, new system_mvc_StaticController($content));
 $page->addController(system_web_PageArea::MAIN_NAV, $navbarController);
-$page->setTemplate('templates/TwoColumns_Markup.php');
+if (!is_null(config_Configuration::COPANY_LOGO_PATH)) {
+	$rootUrl = config_Configuration::getInstance()->getRootUrl();
+	$page->setSiteLogo(sprintf('<a href="%s"><img src="%s" /></a>',
+		$rootUrl, $rootUrl . config_Configuration::COPANY_LOGO_PATH));
+}
+if (!is_null(config_Configuration::FOOTER_HTML)) {
+	$page->addController(system_web_PageArea::FOOTER,
+		new system_mvc_StaticController(config_Configuration::FOOTER_HTML));
+}
+$page->setTemplate('templates/default.tpl');
 
 // Render page
 $page->render();
