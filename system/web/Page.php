@@ -20,13 +20,13 @@ class system_web_Page extends system_mvc_View
 	public function __construct()
 	{
 		$this->regionControllers = array();
-		$this->regionControllers[system_web_PageArea::CONTENT]      = new system_mvc_CompositeController();
-		$this->regionControllers[system_web_PageArea::HEADING]      = new system_mvc_CompositeController();
-		$this->regionControllers[system_web_PageArea::TOP_BAR]      = new system_mvc_CompositeController();
-		$this->regionControllers[system_web_PageArea::MAIN_NAV]     = new system_mvc_CompositeController();
-		$this->regionControllers[system_web_PageArea::LEFT_COLUMN]  = new system_mvc_CompositeController();
-		$this->regionControllers[system_web_PageArea::RIGHT_COLUMN] = new system_mvc_CompositeController();
-		$this->regionControllers[system_web_PageArea::FOOTER]       = new system_mvc_CompositeController();
+		$this->regionControllers[system_web_PageRegion::CONTENT]      = new system_mvc_CompositeController();
+		$this->regionControllers[system_web_PageRegion::HEADING]      = new system_mvc_CompositeController();
+		$this->regionControllers[system_web_PageRegion::TOP_BAR]      = new system_mvc_CompositeController();
+		$this->regionControllers[system_web_PageRegion::MAIN_NAV]     = new system_mvc_CompositeController();
+		$this->regionControllers[system_web_PageRegion::LEFT_COLUMN]  = new system_mvc_CompositeController();
+		$this->regionControllers[system_web_PageRegion::RIGHT_COLUMN] = new system_mvc_CompositeController();
+		$this->regionControllers[system_web_PageRegion::FOOTER]       = new system_mvc_CompositeController();
 
 		// Set default theme CSS path, if set in Configuration)
 		if (!is_null(config_Configuration::THEME_PATH)) {
@@ -109,13 +109,13 @@ class system_web_Page extends system_mvc_View
 			'siteLogo'    => $this->siteLogo,
 			'breadcrumbs' => $this->breadcrumbs,
 			'headElement' => $this->generateHeadElement(),
-			'content'     => $this->regionControllers[system_web_PageArea::CONTENT],
-		    'footer'      => $this->regionControllers[system_web_PageArea::FOOTER],
-		    'heading'     => $this->regionControllers[system_web_PageArea::HEADING],
-		    'leftColumn'  => $this->regionControllers[system_web_PageArea::LEFT_COLUMN],
-		    'mainNav'     => $this->regionControllers[system_web_PageArea::MAIN_NAV],
-		    'rightColumn' => $this->regionControllers[system_web_PageArea::RIGHT_COLUMN],
-		    'topBar'      => $this->regionControllers[system_web_PageArea::TOP_BAR]
+			'content'     => $this->regionControllers[system_web_PageRegion::CONTENT],
+		    'footer'      => $this->regionControllers[system_web_PageRegion::FOOTER],
+		    'heading'     => $this->regionControllers[system_web_PageRegion::HEADING],
+		    'leftColumn'  => $this->regionControllers[system_web_PageRegion::LEFT_COLUMN],
+		    'mainNav'     => $this->regionControllers[system_web_PageRegion::MAIN_NAV],
+		    'rightColumn' => $this->regionControllers[system_web_PageRegion::RIGHT_COLUMN],
+		    'topBar'      => $this->regionControllers[system_web_PageRegion::TOP_BAR]
 		);
 	    
 	    parent::render($pageRenderArgs);

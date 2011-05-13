@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Constants that identify the logical areas of a web page.
+ * Constants that identify the logical regions of a web page.
  */
-class system_web_PageArea
+class system_web_PageRegion
 {
 	const CONTENT      = 0;
 	const HEADING      = 1;
