@@ -14,7 +14,7 @@ class modules_tasks_model_Task
 
 	public static function retrieveCountFromDb()
 	{
-		return system_core_Application::getInstance()->getDb()
+		return system_core_Services::getInstance()->getDb()
 			->runSingleValueQuery('SELECT COUNT(1) FROM task');
 	}
 

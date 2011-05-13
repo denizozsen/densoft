@@ -16,7 +16,7 @@ $rootController->handleActions();
 ///////  THIS CODE SHOULD BE HANDLED IN SOME CONTROLLER  ////////////
 
 // Obtain all tasks from db and build up mark-up
-$db = system_core_Application::getInstance()->getDb();
+$db = system_core_Services::getInstance()->getDb();
 $allTasks = $db->runQueryAndReturnAllRows('SELECT * FROM task');
 $numTasks = count($allTasks);
 

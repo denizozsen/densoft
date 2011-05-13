@@ -14,7 +14,7 @@ class modules_tasks_model_TaskRepository implements system_core_Repository
 			throw new Exception("Key must be a positive integer, was: {$key}");
 		}
 
-		$db = system_core_Application::getInstance()->getDb();
+		$db = system_core_Services::getInstance()->getDb();
 		$taskRow = $db->runSingleRowQuery("
 			SELECT id, name, description, creation_date
 				FROM task
@@ -30,7 +30,7 @@ class modules_tasks_model_TaskRepository implements system_core_Repository
 
 	public function getAll()
 	{
-		$db = system_core_Application::getInstance()->getDb();
+		$db = system_core_Services::getInstance()->getDb();
 		$taskQueryResult = $db->runQuery("
 			SELECT id, name, description, creation_date
 				FROM task
@@ -47,7 +47,7 @@ class modules_tasks_model_TaskRepository implements system_core_Repository
 
 	public function add(modules_tasks_model_Task $task)
 	{
-		$db = system_core_Application::getInstance()->getDb();
+		$db = system_core_Services::getInstance()->getDb();
 		$db->runQuery("
 			INSERT INTO task (id, name, description, creation_date)
 				VALUES ({$task->getId()}, {$task->getName()}, {$task->getDescription()}, {$task->getCreationDate()})");
@@ -55,7 +55,7 @@ class modules_tasks_model_TaskRepository implements system_core_Repository
 
 	public function saveChanges(modules_tasks_model_Task $task)
 	{
-		$db = system_core_Application::getInstance()->getDb();
+		$db = system_core_Services::getInstance()->getDb();
 		$db->runQuery("
 			UPDATE task
 				SET name          = '{$task->getName()}',
