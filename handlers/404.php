@@ -7,8 +7,9 @@ $request = system_web_Request::createFromCurrentRequest();
 $rootController = new system_mvc_CompositeController();
 
 // Instantiate controllers
-$rootController->addChildController(
-    $navbarController = new modules_navigation_NavigationLinksController('about', $request));
+$navbarController =
+	new modules_navigation_NavigationLinksController('404', $request);
+$rootController->addChildController($navbarController);
 
 // Handle all actions via root controller
 $rootController->handleActions();
@@ -31,13 +32,21 @@ EOF;
 $config = config_Configuration::getInstance();
 
 // Instantiate page and set parameters
-// TODO - some things should go into the config, and be read by base class: Page
-//        E.g.: company logo and theme !!!
-$page = new templates_TwoColumns();
-$page->setPageTitle('Invalid Path - ' . config_Configuration::SITE_NAME);
-$page->setPageHeading('Invalid Path');
-$page->addContentColumnController(new system_web_StaticController($content));
-$page->addNavbarColumnController($navbarController);
+$page = new system_web_Page();
+$page->setTitle('Invalid Path - ' . config_Configuration::SITE_NAME);
+$page->setMainHeading('Invalid Path');
+$page->addController(system_web_PageRegion::CONTENT, new system_mvc_StaticController($content));
+$page->addController(system_web_PageRegion::MAIN_NAV, $navbarController);
+if (!is_null(config_Configuration::COPANY_LOGO_PATH)) {
+	$rootUrl = config_Configuration::getInstance()->getRootUrl();
+	$page->setSiteLogo(sprintf('<a href="%s"><img src="%s" /></a>',
+		$rootUrl, $rootUrl . config_Configuration::COPANY_LOGO_PATH));
+}
+if (!is_null(config_Configuration::FOOTER_HTML)) {
+	$page->addController(system_web_PageRegion::FOOTER,
+		new system_mvc_StaticController(config_Configuration::FOOTER_HTML));
+}
+$page->setTemplate('templates/default.tpl');
 
 // Render page
 $page->render();
