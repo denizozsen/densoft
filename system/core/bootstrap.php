@@ -1,9 +1,7 @@
 <?php
 
 // TODO - Append the auto-loader to the set of existing auto-loaders
-// TODO - test if the require_once for ClassNotFoundException is needed
 // Declare auto-loader first, to avoid require statements in following code
-//require_once 'system/core/ClassNotFoundException.php';
 /**
  * Auto-load handler that expects that class names match the full path of the
  * file in which they are declared, with slashes replaced by underscores, e.g.
