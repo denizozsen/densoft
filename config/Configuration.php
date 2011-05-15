@@ -8,6 +8,7 @@
 abstract class config_Configuration
 {	
 	const HANDLERS_DIR         = 'handlers/';
+	const ERROR_HANDLER_NAME   = 'Error';
 	const HOMEPAGE_SCRIPT_PATH = 'handlers/tasklist.php';
 	const SITE_NAME            = 'Home Monitor';
 	const THEME_PATH           = 'themes/basic/theme.css';
@@ -21,7 +22,7 @@ abstract class config_Configuration
 	/**
 	 * Retrieves the configuration appropriate for the current environment,
 	 * i.e. for either local, test or live.
-	 *
+	 * 
 	 * @return Configuration
 	 */
 	public static function getInstance()
@@ -34,19 +35,40 @@ abstract class config_Configuration
 		return self::$instance;
 	}
 	
+	/**
+	 * Sets the configuration instance to be used in the current environment.
+	 * 
+	 * @param config_Configuration $instance the configuration instance to be
+	 *        used in the current environment
+	 */
 	public static function setInstance(config_Configuration $instance)
 	{
 		self::$instance = $instance;
 	}
 	
-	public function getRequestToScriptTable()
+	public function createCoreDatabase()
 	{
-		if ($this->requestToScriptTable == null) {
-			$this->requestToScriptTable = array();
-			// Insert any request-to-script mappings here
-		}
-		
-		return $this->requestToScriptTable;
+		return new system_core_Database();
+	}
+	
+	public function createCoreMasterRepository()
+	{
+		return new system_core_MasterRepository();
+	}
+	
+	public function createWebRouter()
+	{
+		return new system_web_Router();
+	}
+	
+	public function createWebRequest()
+	{
+		return new system_web_Request();
+	}
+	
+	public function createWebPage()
+	{
+		return new system_web_Page();
 	}
 	
 	public abstract function getIncludePath();

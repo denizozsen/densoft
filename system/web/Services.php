@@ -9,6 +9,7 @@ class system_web_Services
 {
 	private static $instance;
 	
+	private $router;
 	private $request;
 	private $page;
 	
@@ -24,28 +25,31 @@ class system_web_Services
 		return self::$instance;
 	}
 	
-	public function getRequest()
+	public function getRouter()
 	{
-		return $this->request;
+		if (is_null($this->router)) {
+			$this->router = config_Configuration::getInstance()->createWebRouter();
+		}
+		
+		return $this->router;
 	}
 	
-	public function setRequest(system_web_Request $request)
+	public function getRequest()
 	{
-		$this->request = $request;
+		if (is_null($this->request)) {
+			$this->request = config_Configuration::getInstance()->createWebRequest();
+		}
+		
+		return $this->request;
 	}
 	
 	public function getPage()
 	{
 		if (is_null($this->page)) {
-			$this->page = new system_web_Page();
+			$this->page = config_Configuration::getInstance()->createWebPage();
 		}
 		
 		return $this->page;
-	}
-	
-	public function setPage(system_web_Page $page)
-	{
-		$this->page = $page;
 	}
 	
 	private function __construct()

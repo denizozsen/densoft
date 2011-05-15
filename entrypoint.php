@@ -1,20 +1,23 @@
 <?php
 
-// Perform bootstrapping, such as setting up the include path and error handlers
+// Perform bootstrapping, such as setting up which configuration to use,
+// the include path, error handlers etc
 include 'system/core/bootstrap.php';
 
-// Create request object and pass it to system_web_Services
-system_web_Services::getInstance()->setRequest(
-	system_web_Router::createRequest($_SERVER['REDIRECT_URL']));
+// Initialise request object
+// TODO - check that $_SERVER['REDIRECT_URL'] is reliable and secure
+system_web_Services::getInstance()->getRouter()->initRequestPathAndParams(
+		system_web_Services::getInstance()->getRequest(),
+		$_SERVER['REDIRECT_URL'], $_GET, $_POST);
 
-// Obtain the request handler
-$requestHandler =
-	system_web_Services::getInstance()->getRequest()->getHandler();
+// Obtain request handler
+$requestHandler = system_web_Services::getInstance()
+	->getRouter()->findHandler(system_web_Services::getInstance()->getRequest());
 
 // Let request handler perform any necessary initialisation
 $requestHandler->init();
 
-// Add controllers supplied by the handler
+// Let handler set up controllers and other page settings
 $requestHandler->configurePage(system_web_Services::getInstance()->getPage());
 
 // Execute any commands issued by the client

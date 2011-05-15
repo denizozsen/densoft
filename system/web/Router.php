@@ -9,8 +9,33 @@ class system_web_Router
 {
     // TODO - system_web_Router: impleent createRequest() that creates a Request object based on the current request parameters
 	// TODO - should getScriptForRequest throw Exception instead of returning false, if no match found
-
-	public static function createRequest($requestUrl)
+	
+	public function initRequestPathAndParams(
+		system_web_Request $request, $urlPath, array $params, array $commandParams)
+	{
+		// Set request URL
+		$request->setRawPath($urlPath);
+		
+		// Break up URL into its elements
+		$urlElements = explode('/', $requestUrl);
+		
+		// Eliminate preceding and trailing empty URL elements
+		if ( (count($urlElements) != 0) && ('' == $urlElements[0]) ) {
+			array_shift($urlElements);
+		}
+		if ( (count($urlElements) != 0) && ('' == $urlElements[count($urlElements)-1]) ) {
+			array_pop($urlElements);
+		}
+		
+		// Set request path array
+		$request->setPath($urlElements);
+		
+		// Set request parameters
+		$request->setParameters($params);
+		$request->setCommandParameters($commandParams);
+	}
+	
+	public function findHandler(system_web_Request $request)
 	{		
 		$urlElements = explode('/', $requestUrl);
 		
@@ -52,7 +77,7 @@ class system_web_Router
 		return $request;
 	}
 	
-	private static function getDefaultHandler()
+	private function getDefaultHandler()
 	{
 		return null; // TODO - get default handler (from config?)
 	}
@@ -97,7 +122,7 @@ class system_web_Router
 	 * Redirects to the given URL.
 	 * @param string $url the URL to which to redirect.
 	 */
-	public static function redirectTo($url)
+	public function redirectTo($url)
 	{
 		header("Location: $url");
 	}
