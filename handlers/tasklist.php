@@ -13,7 +13,7 @@ $rootController->addChildController($navbarController);
 // Handle all actions via root controller
 $rootController->handleActions();
 
-///////  THIS CODE SHOULD BE HANDLED IN SOME CONTROLLER  ////////////
+///////  THIS CODE SHOULD BE IN SOME CONTROLLER  ////////////
 
 // Obtain all tasks from db and build up mark-up
 $db = system_core_Services::getInstance()->getDb();

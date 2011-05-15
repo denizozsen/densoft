@@ -1,43 +1,41 @@
 <?php
 
+/**
+ * TODO - document class system_web_Request
+ * 
+ * @author Deniz Ozsen
+ */
 class system_web_Request
 {
-    private $page;
+	private $handler;
     private $parameters;
-
+	
     // TODO - finish implementation of and test request contributions
     private $contributions;
-
-    public static function createFromCurrentRequest()
+		
+    public function __construct($handler, $parameters, $contributions = array())
     {
-        $page = ''; // TODO - parse page from request URL
-        $parameters = array(); // TODO - parse parameters from request URL
-        return new self($page, $parameters);
-    }
-
-    private function __construct($page, $parameters, $contributions = array())
-    {
-        $this->page       = $page;
+        $this->handler    = $handler;
         $this->parameters = $parameters;
-
+		
         $this->contributions = $contributions;
     }
-
-    public function getPage()
+	
+    public function getHandler()
     {
-        return $this->page;
+        return $this->handler;
     }
-
+	
     public function getParameters()
     {
         return $this->parameters;
     }
-
+	
     public function getContributions()
     {
         return $this->contributions;
     }
-
+	
     public function addContribution(system_web_RequestParticipant $contribution)
     {
         $this->contributions[] = $contribution;

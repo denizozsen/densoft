@@ -45,7 +45,7 @@ class system_mvc_CompositeController extends system_mvc_Controller
         }
     }
 	
-    public function render()
+    public function render(array $renderArgs = array())
     {
         switch(count($this->childControllers))
         {

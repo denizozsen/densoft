@@ -58,7 +58,7 @@ class system_web_Page extends system_mvc_View
 	        
 	        $allControllers = array();
 	        foreach($this->regionControllers as $controllersForRegion) {
-	            array_merge($allControllers, $controllersForRegion);
+	            $allControllers[] = $controllersForRegion;
 	        }
 	        return $allControllers;
 	        

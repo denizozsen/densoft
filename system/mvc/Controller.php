@@ -5,11 +5,11 @@
  *
  * @author studio
  */
-abstract class system_mvc_Controller
+abstract class system_mvc_Controller implements system_mvc_Renderable
 {
     /**
      * Handles any action that has been performed, relevant to this
-     * controller.
+     * controller. The base class implementation of this method does nothing.
      */
     public function handleActions()
     {
@@ -17,9 +17,10 @@ abstract class system_mvc_Controller
     }
 
     /**
-     * Renders the view(s) managed by this controller.
+     * Renders the view(s) managed by this controller. The base class
+     * implementation of this method does nothing.
      */
-    public function render()
+    public function render(array $renderArgs = array())
     {
         // default behaviour: render nothing
     }

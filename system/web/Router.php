@@ -10,6 +10,53 @@ class system_web_Router
     // TODO - system_web_Router: impleent createRequest() that creates a Request object based on the current request parameters
 	// TODO - should getScriptForRequest throw Exception instead of returning false, if no match found
 
+	public static function createRequest($requestUrl)
+	{		
+		$urlElements = explode('/', $requestUrl);
+		
+		// Eliminate preceding and trailing empty elements
+		if ( (count($urlElements) != 0) && ('' == $urlElements[0]) ) {
+			array_shift($urlElements);
+		}
+		if ( (count($urlElements) != 0) && ('' == $urlElements[count($urlElements)-1]) ) {
+			array_pop($urlElements);
+		}
+		
+		$handler = null;
+		$parameters = array();
+		
+		// Find handler class in handlers directory
+		$handlerPathCandidate = config_Configuration::HANDLERS_DIR;
+		for($i = 0; $i < count($urlElements); ++$i) {
+			$element = $urlElements[$i];
+			// TODO - recurse into 'handlers' dir, find matching handler
+			$handlerPathCandidate .= $element;
+			if (is_file("$handlerPathCandidate.php")) {
+				require_once("$handlerPathCandidate.php");
+				$handlerClass = new ReflectionClass($element); // TODO - lowercase, then capitalise first letter
+				$handler = $handlerClass->newInstance();
+				$parameters = array_slice($urlElements, $i+1);
+				break;
+			}
+			$handlerPathCandidate .= '/';
+		}
+		
+		if (is_null($handler)) {
+			$handler = getDefaultHandler();
+			$parameters = $urlElements;
+		}
+		
+		$request = new system_web_Request($handler, $parameters);
+		$handler->setRequest($request);
+		
+		return $request;
+	}
+	
+	private static function getDefaultHandler()
+	{
+		return null; // TODO - get default handler (from config?)
+	}
+	
 	/**
 	 * Returns the script path for the given request path.
 	 * @param string $requestPath a request path, excluding http and server name
@@ -45,7 +92,7 @@ class system_web_Router
 		// If still no match, return false
 		return false;
 	}
-
+	
 	/**
 	 * Redirects to the given URL.
 	 * @param string $url the URL to which to redirect.
@@ -54,7 +101,7 @@ class system_web_Router
 	{
 		header("Location: $url");
 	}
-
+	
 	/**
 	 * Parses the request path and returns the corresponding request
 	 * specification.

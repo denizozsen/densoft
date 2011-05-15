@@ -26,11 +26,12 @@ class system_web_Services
 	
 	public function getRequest()
 	{
-		if (is_null($this->request)) {
-			$this->request = system_web_Request::createFromCurrentRequest();
-		}
-		
 		return $this->request;
+	}
+	
+	public function setRequest(system_web_Request $request)
+	{
+		$this->request = $request;
 	}
 	
 	public function getPage()
@@ -40,6 +41,11 @@ class system_web_Services
 		}
 		
 		return $this->page;
+	}
+	
+	public function setPage(system_web_Page $page)
+	{
+		$this->page = $page;
 	}
 	
 	private function __construct()

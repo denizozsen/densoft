@@ -34,7 +34,7 @@ class modules_navigation_NavigationLinksController
         // Do nothing, since this module does not handle any actions
     }
 
-    public function render()
+    public function render(array $renderArgs = array())
     {
 		$this->view->render();
     }
