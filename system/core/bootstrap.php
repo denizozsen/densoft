@@ -20,6 +20,17 @@ function __autoload($className)
 	}
 }
 
+// Set configuration appropriate for current environment
+$lowercaseServerName = strtolower($_SERVER['SERVER_NAME']);
+if (strpos($lowercaseServerName, strtolower('local')) === 0) {
+	config_Configuration::setInstance(new config_LocalConfiguration());
+} elseif (strpos($lowercaseServerName, strtolower('test')) === 0) {
+	config_Configuration::setInstance(new config_TestConfiguration());
+} else {
+	config_Configuration::setInstance(new config_LiveConfiguration());
+}
+unset($lowercaseServerName);
+
 // Set handlers for uncaught exceptions and for errors
 set_exception_handler('handleUncaughtException');
 set_error_handler('handleError');
