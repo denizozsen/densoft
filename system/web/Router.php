@@ -17,7 +17,7 @@ class system_web_Router
 		$request->setRawPath($urlPath);
 		
 		// Break up URL into its elements
-		$urlElements = explode('/', $requestUrl);
+		$urlElements = explode('/', $urlPath);
 		
 		// Eliminate preceding and trailing empty URL elements
 		if ( (count($urlElements) != 0) && ('' == $urlElements[0]) ) {
@@ -35,51 +35,47 @@ class system_web_Router
 		$request->setCommandParameters($commandParams);
 	}
 	
-	public function findHandler(system_web_Request $request)
-	{		
-		$urlElements = explode('/', $requestUrl);
-		
-		// Eliminate preceding and trailing empty elements
-		if ( (count($urlElements) != 0) && ('' == $urlElements[0]) ) {
-			array_shift($urlElements);
-		}
-		if ( (count($urlElements) != 0) && ('' == $urlElements[count($urlElements)-1]) ) {
-			array_pop($urlElements);
-		}
-		
+	public function findHandlerAndUpdateRequest(system_web_Request $request)
+	{				
 		$handler = null;
-		$parameters = array();
 		
-		// Find handler class in handlers directory
-		$handlerPathCandidate = config_Configuration::HANDLERS_DIR;
-		for($i = 0; $i < count($urlElements); ++$i) {
-			$element = $urlElements[$i];
-			// TODO - recurse into 'handlers' dir, find matching handler
-			$handlerPathCandidate .= $element;
-			if (is_file("$handlerPathCandidate.php")) {
-				require_once("$handlerPathCandidate.php");
-				$handlerClass = new ReflectionClass($element); // TODO - lowercase, then capitalise first letter
-				$handler = $handlerClass->newInstance();
-				$parameters = array_slice($urlElements, $i+1);
-				break;
-			}
-			$handlerPathCandidate .= '/';
-		}
-		
-		if (is_null($handler)) {
+		if ($request->getRawPath() == '/') {
+			
 			$handler = getDefaultHandler();
-			$parameters = $urlElements;
-		}
+			
+		} else {
 		
-		$request = new system_web_Request($handler, $parameters);
+			// Find handler class in handlers directory
+			$urlElements = $request->getPath();
+			$handlerPathCandidate = config_Configuration::HANDLERS_DIR;
+			for($i = 0; $i < count($urlElements); ++$i) {
+				$element = $urlElements[$i];
+				$handlerPathCandidate .= $element;
+				if (is_file("$handlerPathCandidate.php")) {
+					require_once("$handlerPathCandidate.php");
+					$handlerClass = new ReflectionClass($element . 'Handler'); // TODO - lowercase, then capitalise first letter
+					$handler = $handlerClass->newInstance();
+					$request->setPath($handlerPathCandidate);
+					$request->setParameters( array_merge(
+						array_slice($urlElements, $i+1),
+						$request->getParameters()) );
+					break;
+				}
+				$handlerPathCandidate .= '/';
+			}
+		
+		}
+						
 		$handler->setRequest($request);
 		
-		return $request;
+		return $handler;
 	}
 	
 	private function getDefaultHandler()
 	{
-		return null; // TODO - get default handler (from config?)
+		require_once(config_Configuration::HANDLERS_DIR . 'Default.php');
+		$handlerClass = new ReflectionClass('DefaultHandler');
+		return $handlerClass->newInstance();
 	}
 	
 	/**

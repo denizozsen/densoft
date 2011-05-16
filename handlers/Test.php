@@ -1,6 +1,6 @@
 <?php
 
-class Test extends system_web_RequestHandler
+class TestHandler extends system_web_RequestHandler
 {
 	public function init()
 	{

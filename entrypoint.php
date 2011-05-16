@@ -4,15 +4,16 @@
 // the include path, error handlers etc
 include 'system/core/bootstrap.php';
 
+$request = system_web_Services::getInstance()->getRequest();
+
 // Initialise request object
 // TODO - check that $_SERVER['REDIRECT_URL'] is reliable and secure
 system_web_Services::getInstance()->getRouter()->initRequestPathAndParams(
-		system_web_Services::getInstance()->getRequest(),
-		$_SERVER['REDIRECT_URL'], $_GET, $_POST);
+		$request, $_SERVER['REDIRECT_URL'], $_GET, $_POST);
 
 // Obtain request handler
 $requestHandler = system_web_Services::getInstance()
-	->getRouter()->findHandler(system_web_Services::getInstance()->getRequest());
+	->getRouter()->findHandlerAndUpdateRequest(system_web_Services::getInstance()->getRequest());
 
 // Let request handler perform any necessary initialisation
 $requestHandler->init();
