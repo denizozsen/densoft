@@ -29,22 +29,22 @@ $content = <<<EOF
 EOF;
 
 // Get configuration instance
-$config = config_Configuration::getInstance();
+$config = Configuration::getInstance();
 
 // Instantiate page and set parameters
 $page = new system_web_Page();
-$page->setTitle('Invalid Path - ' . config_Configuration::SITE_NAME);
+$page->setTitle('Invalid Path - ' . Configuration::SITE_NAME);
 $page->setMainHeading('Invalid Path');
 $page->addController(system_web_PageRegion::CONTENT, new system_mvc_StaticController($content));
 $page->addController(system_web_PageRegion::MAIN_NAV, $navbarController);
-if (!is_null(config_Configuration::COPANY_LOGO_PATH)) {
-	$rootUrl = config_Configuration::getInstance()->getRootUrl();
+if (!is_null(Configuration::COPANY_LOGO_PATH)) {
+	$rootUrl = Configuration::getInstance()->getRootUrl();
 	$page->setSiteLogo(sprintf('<a href="%s"><img src="%s" /></a>',
-		$rootUrl, $rootUrl . config_Configuration::COPANY_LOGO_PATH));
+		$rootUrl, $rootUrl . Configuration::COPANY_LOGO_PATH));
 }
-if (!is_null(config_Configuration::FOOTER_HTML)) {
+if (!is_null(Configuration::FOOTER_HTML)) {
 	$page->addController(system_web_PageRegion::FOOTER,
-		new system_mvc_StaticController(config_Configuration::FOOTER_HTML));
+		new system_mvc_StaticController(Configuration::FOOTER_HTML));
 }
 $page->setTemplate('templates/default.tpl');
 

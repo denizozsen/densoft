@@ -18,7 +18,7 @@ $rootController->handleActions();
 // Instantiate page and set parameters
 $taskName = $taskDetailsController->getModel()->getName();
 $page = new templates_TwoColumns();
-$page->setPageTitle("Task: '{$taskName}' - " . config_Configuration::SITE_NAME);
+$page->setPageTitle("Task: '{$taskName}' - " . Configuration::SITE_NAME);
 $page->setPageHeading("Task: '{$taskName}'");
 $page->addNavbarColumnController($navbarController);
 $page->addContentColumnController($taskDetailsController);

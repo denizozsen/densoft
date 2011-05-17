@@ -3,9 +3,9 @@
 /**
  * Configuration that is specific to the live environment.
  *
- * @author Deniz …zsen
+ * @author Deniz Ozsen
  */
-class config_LiveConfiguration extends config_Configuration
+class config_LiveConfiguration extends Configuration
 {
 	const INCLUDE_PATH = '/insert/path/to/docroot/here';
 	const ROOT_URL     = '/';

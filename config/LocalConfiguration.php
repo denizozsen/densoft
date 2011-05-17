@@ -3,9 +3,9 @@
 /**
  * Configuration that is specific to the local environment.
  *
- * @author Deniz …zsen
+ * @author Deniz Ozsen
  */
-class config_LocalConfiguration extends config_Configuration
+class config_LocalConfiguration extends Configuration
 {
 	const INCLUDE_PATH = '/Shared/sites/densoft';
 	const ROOT_URL     = '/';

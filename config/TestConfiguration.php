@@ -3,9 +3,9 @@
 /**
  * Configuration that is specific to the test environment.
  *
- * @author Deniz …zsen
+ * @author Deniz Ozsen
  */
-class config_TestConfiguration extends config_Configuration
+class config_TestConfiguration extends Configuration
 {
 	const INCLUDE_PATH = '/sharedfiles/sites/test.densoft.mu';
 	const ROOT_URL     = '/';

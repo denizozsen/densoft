@@ -10,16 +10,16 @@ class TestHandler extends system_web_RequestHandler
 	public function configurePage(system_web_Page $page)
 	{
 		$page->setTemplate('templates/default.tpl');
-		$page->setTitle('Task List - ' . config_Configuration::SITE_NAME);
+		$page->setTitle('Task List - ' . Configuration::SITE_NAME);
 		$page->setMainHeading('Task List');
-		if (!is_null(config_Configuration::COPANY_LOGO_PATH)) {
-			$rootUrl = config_Configuration::getInstance()->getRootUrl();
+		if (!is_null(Configuration::COPANY_LOGO_PATH)) {
+			$rootUrl = Configuration::getInstance()->getRootUrl();
 			$page->setSiteLogo(sprintf('<a href="%s"><img src="%s" /></a>',
-				$rootUrl, $rootUrl . config_Configuration::COPANY_LOGO_PATH));
+				$rootUrl, $rootUrl . Configuration::COPANY_LOGO_PATH));
 		}
-		if (!is_null(config_Configuration::FOOTER_HTML)) {
+		if (!is_null(Configuration::FOOTER_HTML)) {
 			$page->addController(system_web_PageRegion::FOOTER,
-				new system_mvc_StaticController(config_Configuration::FOOTER_HTML));
+				new system_mvc_StaticController(Configuration::FOOTER_HTML));
 		}
 		
 		$navController =

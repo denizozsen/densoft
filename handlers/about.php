@@ -27,11 +27,11 @@ $content = <<<EOF
 EOF;
 
 // Get configuration instance
-$config = config_Configuration::getInstance();
+$config = Configuration::getInstance();
 
 // Instantiate page and set parameters
 $page = new templates_TwoColumns();
-$page->setPageTitle('About - ' . config_Configuration::SITE_NAME);
+$page->setPageTitle('About - ' . Configuration::SITE_NAME);
 $page->setPageHeading('About');
 $page->addContentColumnController(new system_mvc_StaticController($content));
 $page->addNavbarColumnController($navbarController);

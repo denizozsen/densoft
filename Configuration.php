@@ -3,10 +3,10 @@
 /**
  * Web Application Configuration.
  *
- * @author Deniz …zsen
+ * @author Deniz Ozsen
  */
-abstract class config_Configuration
-{	
+abstract class Configuration
+{
 	const HANDLERS_DIR         = 'handlers/';
 	const ERROR_HANDLER_NAME   = 'Error';
 	const HOMEPAGE_SCRIPT_PATH = 'handlers/tasklist.php';
@@ -22,11 +22,11 @@ abstract class config_Configuration
 	/**
 	 * Retrieves the configuration appropriate for the current environment,
 	 * i.e. for either local, test or live.
-	 * 
+	 *
 	 * @return Configuration
 	 */
 	public static function getInstance()
-	{		
+	{
 		if (self::$instance == null) {
 			throw new Exception(
 				'Configuration instance not yet set. Set it using setInstance(...)');
@@ -37,11 +37,11 @@ abstract class config_Configuration
 	
 	/**
 	 * Sets the configuration instance to be used in the current environment.
-	 * 
-	 * @param config_Configuration $instance the configuration instance to be
+	 *
+	 * @param Configuration $instance the configuration instance to be
 	 *        used in the current environment
 	 */
-	public static function setInstance(config_Configuration $instance)
+	public static function setInstance(Configuration $instance)
 	{
 		self::$instance = $instance;
 	}
