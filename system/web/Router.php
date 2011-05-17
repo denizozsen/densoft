@@ -36,18 +36,18 @@ class system_web_Router
 	}
 	
 	public function findHandlerAndUpdateRequest(system_web_Request $request)
-	{				
+	{
 		$handler = null;
 		
 		if ($request->getRawPath() == '/') {
 			
-			$handler = getDefaultHandler();
+			$handler = $this->getDefaultHandler();
 			
 		} else {
 		
 			// Find handler class in handlers directory
 			$urlElements = $request->getPath();
-			$handlerPathCandidate = config_Configuration::HANDLERS_DIR;
+			$handlerPathCandidate = Configuration::HANDLERS_DIR;
 			for($i = 0; $i < count($urlElements); ++$i) {
 				$element = $urlElements[$i];
 				$handlerPathCandidate .= $element;
@@ -73,7 +73,7 @@ class system_web_Router
 	
 	private function getDefaultHandler()
 	{
-		require_once(config_Configuration::HANDLERS_DIR . 'Default.php');
+		require_once(Configuration::HANDLERS_DIR . 'Default.php');
 		$handlerClass = new ReflectionClass('DefaultHandler');
 		return $handlerClass->newInstance();
 	}
@@ -91,7 +91,7 @@ class system_web_Router
 
 		// Handle home page request (when request spec has no elements)
 		if (count($requestSpec) == 0) {
-			return config_Configuration::HOMEPAGE_SCRIPT_PATH;
+			return Configuration::HOMEPAGE_SCRIPT_PATH;
 		}
 
 		// Obtain first element of request spec
@@ -99,13 +99,13 @@ class system_web_Router
 
 		// Check for match in routing configuration
 		$requestToScriptTable =
-			config_Configuration::getInstance()->getRequestToScriptTable();
+			Configuration::getInstance()->getRequestToScriptTable();
 		if (array_key_exists($firstRequestSpecElement, $requestToScriptTable)) {
 			return $requestToScriptTable[strtolower($firstRequestSpecElement)];
 		}
 
 		// If no match in configuration, check if file exists in pages folder
-		$pathInPagesFolder = config_Configuration::HANDLERS_DIR . "{$firstRequestSpecElement}.php";
+		$pathInPagesFolder = Configuration::HANDLERS_DIR . "{$firstRequestSpecElement}.php";
 		if (file_exists($pathInPagesFolder)) {
 			return $pathInPagesFolder;
 		}
