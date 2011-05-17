@@ -4,6 +4,7 @@
 // the include path, error handlers etc
 include 'system/core/bootstrap.php';
 
+// Obtain the request object
 $request = system_web_Services::getInstance()->getRequest();
 
 // Initialise request object
@@ -13,7 +14,10 @@ system_web_Services::getInstance()->getRouter()->initRequestPathAndParams(
 
 // Obtain request handler
 $requestHandler = system_web_Services::getInstance()
-	->getRouter()->findHandlerAndUpdateRequest(system_web_Services::getInstance()->getRequest());
+	->getRouter()->findHandlerAndUpdateRequest($request);
+
+// Unset the request object reference, to avoid global var
+unset($request);
 
 // Let request handler perform any necessary initialisation
 $requestHandler->init();
