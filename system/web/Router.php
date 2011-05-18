@@ -41,9 +41,9 @@ class system_web_Router
 			for($i = 0; $i < count($handlerPathElements); ++$i) {
 				$element = $handlerPathElements[$i];
 				$handlerPathCandidate .= $element;
-				if (is_file("$handlerPathCandidate.php")) {
-					require_once("$handlerPathCandidate.php");
-					$handlerClassName = $element . 'Handler';
+				if (is_file("{$handlerPathCandidate}Handler.php")) {
+					require_once("{$handlerPathCandidate}Handler.php");
+					$handlerClassName = "{$element}Handler}";
 					$handler = new $handlerClassName();
 					$request->setHandlerPath($handlerPathCandidate);
 					$request->setArguments(array_merge(
@@ -63,9 +63,9 @@ class system_web_Router
 	
 	private function getDefaultHandler()
 	{
-		require_once(Configuration::HANDLERS_DIR . 'Default.php');
-		$handlerClass = new ReflectionClass('DefaultHandler');
-		return $handlerClass->newInstance();
+		require_once(Configuration::HANDLERS_DIR . 'DefaultHandler.php');
+		$handlerClassName = 'DefaultHandler';
+		return new $handlerClassName();
 	}
 	
 	/**
