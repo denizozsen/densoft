@@ -7,10 +7,15 @@ include 'system/core/bootstrap.php';
 // Obtain the request object
 $request = system_web_Services::getInstance()->getRequest();
 
-// Initialise request object
 // TODO - check that $_SERVER['REDIRECT_URL'] is reliable and secure
-system_web_Services::getInstance()->getRouter()->initRequestPathAndParams(
-		$request, $_SERVER['REDIRECT_URL'], $_GET, $_POST);
+// Initialise request object
+$rawRequestPath = $_SERVER['REDIRECT_URL'];
+$requestPathElements =
+	system_web_Services::getInstance()->getRouter()->splitRequestPath($rawRequestPath);
+$request->setRawPath($rawRequestPath);
+$request->setPath($requestPathElements);
+$request->setParameters($_GET);
+$request->setCommandParameters($_POST);
 
 // Obtain request handler
 $requestHandler = system_web_Services::getInstance()

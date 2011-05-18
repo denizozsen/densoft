@@ -7,15 +7,10 @@
  */
 class system_web_Router
 {
-    // TODO - system_web_Router: impleent createRequest() that creates a Request object based on the current request parameters
 	// TODO - should getScriptForRequest throw Exception instead of returning false, if no match found
 	
-	public function initRequestPathAndParams(
-		system_web_Request $request, $urlPath, array $params, array $commandParams)
+	public function splitRequestPath($urlPath)
 	{
-		// Set request URL
-		$request->setRawPath($urlPath);
-		
 		// Break up URL into its elements
 		$urlElements = explode('/', $urlPath);
 		
@@ -27,12 +22,7 @@ class system_web_Router
 			array_pop($urlElements);
 		}
 		
-		// Set request path array
-		$request->setPath($urlElements);
-		
-		// Set request parameters
-		$request->setParameters($params);
-		$request->setCommandParameters($commandParams);
+		return $urlElements;
 	}
 	
 	public function findHandlerAndUpdateRequest(system_web_Request $request)
@@ -53,8 +43,8 @@ class system_web_Router
 				$handlerPathCandidate .= $element;
 				if (is_file("$handlerPathCandidate.php")) {
 					require_once("$handlerPathCandidate.php");
-					$handlerClass = new ReflectionClass($element . 'Handler'); // TODO - lowercase, then capitalise first letter
-					$handler = $handlerClass->newInstance();
+					$handlerClassName = $element . 'Handler';
+					$handler = new $handlerClassName();
 					$request->setPath($handlerPathCandidate);
 					$request->setParameters( array_merge(
 						array_slice($urlElements, $i+1),
