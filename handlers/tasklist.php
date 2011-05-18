@@ -37,7 +37,7 @@ EOF;
 
 /////////////////////////////////////////////////////////////////////
 
-// Instantiate page and set parameters
+// Instantiate page and set arguments
 $page = new system_web_Page();
 $page->setTitle('Task List - ' . Configuration::SITE_NAME);
 $page->setMainHeading('Task List');

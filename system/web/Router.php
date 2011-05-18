@@ -36,19 +36,19 @@ class system_web_Router
 		} else {
 		
 			// Find handler class in handlers directory
-			$urlElements = $request->getPath();
+			$handlerPathElements = $request->getHandlerPath();
 			$handlerPathCandidate = Configuration::HANDLERS_DIR;
-			for($i = 0; $i < count($urlElements); ++$i) {
-				$element = $urlElements[$i];
+			for($i = 0; $i < count($handlerPathElements); ++$i) {
+				$element = $handlerPathElements[$i];
 				$handlerPathCandidate .= $element;
 				if (is_file("$handlerPathCandidate.php")) {
 					require_once("$handlerPathCandidate.php");
 					$handlerClassName = $element . 'Handler';
 					$handler = new $handlerClassName();
-					$request->setPath($handlerPathCandidate);
-					$request->setParameters( array_merge(
-						array_slice($urlElements, $i+1),
-						$request->getParameters()) );
+					$request->setHandlerPath($handlerPathCandidate);
+					$request->setArguments(array_merge(
+						array_slice($handlerPathElements, $i+1),
+						$request->getArguments()) );
 					break;
 				}
 				$handlerPathCandidate .= '/';

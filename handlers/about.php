@@ -29,7 +29,7 @@ EOF;
 // Get configuration instance
 $config = Configuration::getInstance();
 
-// Instantiate page and set parameters
+// Instantiate page and set arguments
 $page = new templates_TwoColumns();
 $page->setPageTitle('About - ' . Configuration::SITE_NAME);
 $page->setPageHeading('About');

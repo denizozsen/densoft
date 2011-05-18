@@ -1,5 +1,8 @@
 <?php
 
+
+// TODO - Replace classes RequestContribution and RequestParameterSpecification with interface IRequestArgumentConfiguration
+
 class system_web_RequestContribution
 {
     private $participant;

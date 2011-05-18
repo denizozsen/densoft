@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The Request object holds the path and parameters that represent the
+ * The Request object holds the path and arguments that represent the
  * current web request.
  * 
  * @author Deniz Ozsen
@@ -9,9 +9,9 @@
 class system_web_Request
 {
 	private $rawPath;
-	private $path;
-    private $parameters;
-    private $commandParameters;
+	private $handlerPath;
+    private $arguments;
+    private $commandArguments;
 	
     // TODO - finish implementation of and test request contributions
     private $contributions;
@@ -19,9 +19,9 @@ class system_web_Request
     public function __construct()
     {
     	$this->rawPath           = '';
-    	$this->path              = array();
-        $this->parameters        = array();
-        $this->commandParameters = array();
+    	$this->handlerPath       = array();
+        $this->arguments         = array();
+        $this->commandArguments  = array();
         $this->contributions     = array();
     }
 	
@@ -35,34 +35,34 @@ class system_web_Request
     	$this->rawPath = $rawPath;
     }
     
-    public function getPath()
+    public function getHandlerPath()
     {
-        return $this->path;
+        return $this->handlerPath;
     }
 	
-    public function setPath($path)
+    public function setHandlerPath($handlerPath)
     {
-    	$this->path = $path;
+    	$this->handlerPath = $handlerPath;
     }
     
-    public function getParameters()
+    public function getArguments()
     {
-        return $this->parameters;
+        return $this->arguments;
     }
 	
-    public function setParameters(array $parameters)
+    public function setArguments(array $arguments)
     {
-    	$this->parameters = $parameters;
+    	$this->arguments = $arguments;
     }
     
-    public function getCommandParameters()
+    public function getCommandArguments()
     {
-        return $this->commandParameters;
+        return $this->commandArguments;
     }
 	
-    public function setCommandParameters(array $commandParameters)
+    public function setCommandArguments(array $commandArguments)
     {
-    	$this->commandParameters = $commandParameters;
+    	$this->commandArguments = $commandArguments;
     }
 	
     public function getContributions()

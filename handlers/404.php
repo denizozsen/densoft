@@ -31,7 +31,7 @@ EOF;
 // Get configuration instance
 $config = Configuration::getInstance();
 
-// Instantiate page and set parameters
+// Instantiate page and set arguments
 $page = new system_web_Page();
 $page->setTitle('Invalid Path - ' . Configuration::SITE_NAME);
 $page->setMainHeading('Invalid Path');

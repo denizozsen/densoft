@@ -15,7 +15,7 @@ $rootController->addChildController(
 // Handle all actions via root controller
 $rootController->handleActions();
 
-// Instantiate page and set parameters
+// Instantiate page and set arguments
 $taskName = $taskDetailsController->getModel()->getName();
 $page = new templates_TwoColumns();
 $page->setPageTitle("Task: '{$taskName}' - " . Configuration::SITE_NAME);

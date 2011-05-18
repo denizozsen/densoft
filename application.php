@@ -13,9 +13,9 @@ $rawRequestPath = $_SERVER['REDIRECT_URL'];
 $requestPathElements =
 	system_web_Services::getInstance()->getRouter()->splitRequestPath($rawRequestPath);
 $request->setRawPath($rawRequestPath);
-$request->setPath($requestPathElements);
-$request->setParameters($_GET);
-$request->setCommandParameters($_POST);
+$request->setHandlerPath($requestPathElements);
+$request->setArguments($_GET);
+$request->setCommandArguments($_POST);
 
 // Obtain request handler
 $requestHandler = system_web_Services::getInstance()
