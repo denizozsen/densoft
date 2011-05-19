@@ -2,7 +2,7 @@
 
 /**
  * Utility functions related to URLs.
- * 
+ *
  * @author Deniz Ozsen
  */
 class system_webutils_Urls
@@ -21,5 +21,15 @@ class system_webutils_Urls
 		}
 		
 		return $requestUri;
+	}
+	
+	/**
+	 * TODO - implement and document system_webutils_Urls::splitUrlPath
+	 *
+	 * @param unknown_type $urlPath
+	 */
+	public static function splitUrlPath($urlPath)
+	{
+	    
 	}
 }
