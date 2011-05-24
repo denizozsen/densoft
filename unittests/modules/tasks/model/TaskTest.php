@@ -2,10 +2,10 @@
 
 require_once 'PHPUnit/Framework/TestCase.php';
 
-if (!defined('TEST_INCLUDE_PATH')) {
-	set_include_path(get_include_path() . ':../../../..');
-	define('TEST_INCLUDE_PATH', true);
-}
+//if (!defined('TEST_INCLUDE_PATH')) {
+//	set_include_path(get_include_path() . ':../../../..');
+//	define('TEST_INCLUDE_PATH', true);
+//}
 require_once 'modules/tasks/model/Task.php';
 
 class TaskTest extends PHPUnit_Framework_TestCase
@@ -78,16 +78,16 @@ class TaskTest extends PHPUnit_Framework_TestCase
 		
 	}
 
-	public function runTests()
-	{
-		$this->testRetrieveFromDb_invalidId();
-		$this->testRetrieveFromDb_nonExistingId();
-		$this->testRetrieveFromDb_existingId();
-		
-		$this->testRetrieveListFromDb();
-
-		testRetrieveCountFromDb_emptyTable();
-		testRetrieveCountFromDb_oneEntryInTable();
-		testRetrieveCountFromDb_ninetySixEntriesInTable();
-	}
+//	public function runTests()
+//	{
+//		$this->testRetrieveFromDb_invalidId();
+//		$this->testRetrieveFromDb_nonExistingId();
+//		$this->testRetrieveFromDb_existingId();
+//		
+//		$this->testRetrieveListFromDb();
+//
+//		testRetrieveCountFromDb_emptyTable();
+//		testRetrieveCountFromDb_oneEntryInTable();
+//		testRetrieveCountFromDb_ninetySixEntriesInTable();
+//	}
 }
