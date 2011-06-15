@@ -29,12 +29,13 @@ class system_web_Router
 	{
 		$handler = null;
 		
+		// Handle root path
 		if ($request->getRawPath() == '/') {
-			
 			$handler = $this->getDefaultHandler();
-			
-		} else {
+		}
 		
+		// Handle non-root path
+		else {
 			// Find handler class in handlers directory
 			$handlerPathElements = $request->getHandlerPath();
 			$handlerPathCandidate = Configuration::HANDLERS_DIR;
@@ -53,9 +54,14 @@ class system_web_Router
 				}
 				$handlerPathCandidate .= '/';
 			}
-		
 		}
-						
+		
+		// Handle case where no appropriate handler is found => 404
+        if (null == $handler) {
+            $handler = $this->getErrorHandler();
+        }
+		
+        // Pass request object to handler
 		$handler->setRequest($request);
 		
 		return $handler;
@@ -65,6 +71,13 @@ class system_web_Router
 	{
 		require_once(Configuration::HANDLERS_DIR . 'DefaultHandler.php');
 		$handlerClassName = 'DefaultHandler';
+		return new $handlerClassName();
+	}
+	
+	private function getErrorHandler()
+	{
+		require_once(Configuration::HANDLERS_DIR . 'ErrorHandler.php');
+		$handlerClassName = 'ErrorHandler';
 		return new $handlerClassName();
 	}
 	
