@@ -44,7 +44,7 @@ class system_web_Router
 				$handlerPathCandidate .= $element;
 				if (is_file("{$handlerPathCandidate}Handler.php")) {
 					require_once("{$handlerPathCandidate}Handler.php");
-					$handlerClassName = "{$element}Handler}";
+					$handlerClassName = "{$element}Handler";
 					$handler = new $handlerClassName();
 					$request->setHandlerPath($handlerPathCandidate);
 					$request->setArguments(array_merge(
