@@ -118,12 +118,13 @@ class system_web_Router
 	}
 	
 	/**
-	 * Redirects to the given URL.
+	 * Redirects to the given URL (note: script execution stops immediately).
 	 * @param string $url the URL to which to redirect.
 	 */
 	public function redirectTo($url)
 	{
 		header("Location: $url");
+		exit();
 	}
 	
 	/**
