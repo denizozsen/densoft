@@ -13,6 +13,7 @@ class config_TestConfiguration extends Configuration
 	const DB_USERNAME  = 'homemon';
 	const DB_PASSWORD  = 'R666Xing';
 	const DB_NAME      = 'homemon';
+	const TIMEZONE     = 'Europe/London';
 	
 	public function getIncludePath()
 	{
@@ -42,5 +43,10 @@ class config_TestConfiguration extends Configuration
 	public function getDbName()
 	{
 		return self::DB_NAME;
+	}
+	
+	public function getTimezone()
+	{
+	    return self::TIMEZONE;
 	}
 }

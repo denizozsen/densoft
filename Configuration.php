@@ -77,4 +77,5 @@ abstract class Configuration
 	public abstract function getDbUserName();
 	public abstract function getDbPassword();
 	public abstract function getDbName();
+	public abstract function getTimezone();
 }

@@ -13,6 +13,7 @@ class config_LiveConfiguration extends Configuration
 	const DB_USERNAME  = '';
 	const DB_PASSWORD  = '';
 	const DB_NAME      = '';
+	const TIMEZONE     = 'Europe/London';
 	
 	public function getIncludePath()
 	{
@@ -42,5 +43,10 @@ class config_LiveConfiguration extends Configuration
 	public function getDbName()
 	{
 		return self::DB_NAME;
+	}
+	
+	public function getTimezone()
+	{
+	    return self::TIMEZONE;
 	}
 }

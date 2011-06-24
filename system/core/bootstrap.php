@@ -34,6 +34,9 @@ if (strpos($lowercaseServerName, strtolower('local')) === 0) {
 }
 unset($lowercaseServerName);
 
+// Set timezone
+date_default_timezone_set(Configuration::getInstance()->getTimezone());
+
 // Set handlers for uncaught exceptions and for errors
 set_exception_handler('handleUncaughtException');
 set_error_handler('handleError');
