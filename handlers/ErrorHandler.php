@@ -1,12 +1,7 @@
 <?php
 
-class ErrorHandler extends system_web_RequestHandler
+class ErrorHandler extends system_web_PageRequestHandler
 {
-	public function init()
-	{
-		
-	}
-	
 	public function configurePage(system_web_Page $page)
 	{
 		$page->setTemplate('templates/default.tpl');
