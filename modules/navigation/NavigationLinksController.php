@@ -23,6 +23,7 @@ class modules_navigation_NavigationLinksController
 		// Create model
 		$this->model = array();
 		$this->model[] = new modules_navigation_model_Link('/', 'Task List', (null == $currentRequestPath));
+		$this->model[] = new modules_navigation_model_Link('/task/', 'Create Task', ('task' == $currentRequestPath));
 		$this->model[] = new modules_navigation_model_Link('/about/', 'About', ('about' == $currentRequestPath));
 		
 		// Create view
