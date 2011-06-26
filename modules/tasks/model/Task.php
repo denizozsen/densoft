@@ -10,7 +10,7 @@ class modules_tasks_model_Task
 	private $id;
 	private $name;
 	private $description;
-	private $creationDate;
+	private $startDate;
 
 	public static function retrieveCountFromDb()
 	{
@@ -22,7 +22,8 @@ class modules_tasks_model_Task
 	{
 		$this->id           = -1;
 		$this->name         = 'Untitled Task';
-		$this->creationDate = time();
+		$this->description  = '';
+		$this->startDate    = date('d:m:Y');
 	}
 
 	public function getId()
@@ -55,13 +56,13 @@ class modules_tasks_model_Task
 		$this->description = $description;
 	}
 
-	public function getCreationDate()
+	public function getStartDate()
 	{
-		return $this->creationDate;
+		return $this->startDate;
 	}
 
-	public function setCreationDate($creationDate)
+	public function setStartDate($startDate)
 	{
-		$this->creationDate = $creationDate;
+		$this->startDate = $startDate;
 	}
 }

@@ -2,6 +2,10 @@
 
 class modules_tasks_TaskDetailsController extends system_mvc_Controller
 {
+    const MODE_VIEW   = 1;
+    const MODE_CREATE = 2;
+    const MODE_EDIT   = 3;
+    
     private $request;
     
 	private $model;
@@ -23,10 +27,6 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
 		    // Task id -1 means 'new task', otherwise get from db
 		    if (-1 == $taskId) {
 		        $this->model = new modules_tasks_model_Task();
-		        $this->model->setId(-1);
-		        $this->model->setName('Untitled Task');
-		        $this->model->setDescription('');
-		        $this->model->setCreationDate(date('d:m:Y'));
 		    } else {
     			$this->model =
     				modules_tasks_model_Task::retrieveFromDb($this->getTaskIdFromRequest());
@@ -37,6 +37,23 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
 		return $this->model;
 	}
     
+	public function getMode()
+	{
+	    // Get task id argument from request
+	    $taskId = $this->getTaskIdFromRequest();
+	    
+	    // Task id -1 means 'new task'
+	    if (-1 == $taskId) {
+	        return self::MODE_CREATE;
+	    } else {
+	        if (isset($_GET['edit'])) {
+	            return self::MODE_EDIT;
+	        } else {
+	            return self::MODE_VIEW;
+	        }
+	    }
+	}
+	
     public function handleActions()
     {
         // TODO - implement
@@ -44,7 +61,24 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
     
     public function render(array $renderArgs = array())
     {
-//        $this->view->render($renderArgs);
+        $view = new system_mvc_View();
+        
+        $mode = $this->getMode();
+        switch($mode) {
+            case self::MODE_VIEW:
+            $view->setTemplate('modules/tasks/view/ViewTask.tpl');
+            break;
+            case self::MODE_CREATE:
+            $view->setTemplate('modules/tasks/view/CreateTask.tpl');
+            break;
+            case self::MODE_EDIT:
+            $view->setTemplate('modules/tasks/view/EditTask.tpl');
+            break;
+        }
+        
+        $renderArgs['model'] = $this->model;
+        
+        $view->render($renderArgs);
     }
     
     private function getTaskIdFromRequest()
