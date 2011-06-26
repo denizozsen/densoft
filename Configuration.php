@@ -71,6 +71,7 @@ abstract class Configuration
 		return new system_web_Page();
 	}
 	
+	// Settings differ according to environment (local, test, live)
 	public abstract function getIncludePath();
 	public abstract function getRootUrl();
 	public abstract function getDbServer();
