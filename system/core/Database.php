@@ -3,7 +3,7 @@
 /**
  * Utility functions for database operations.
  *
- * @author Deniz …zsen
+ * @author Deniz Ozsen
  */
 class system_core_Database
 {
@@ -16,9 +16,18 @@ class system_core_Database
 		}
 		
 		// Connect to database; throw exception on error
-		$linkId = mysql_connect($server, $username, $password);
+		try {
+			$linkId = mysql_connect($server, $username, $password);
+		} catch(Exception $exc) {
+			throw new system_core_DatabaseException(
+				sprintf('Unable to connect to database. MySQL error: %s',
+					mysql_error()), mysql_errno());
+		}
+		
+		// If mysql_connect does not return a link id, it's an error 
 		if ($linkId === false) {
-			throw new system_core_DatabaseException(sprintf('MySQL error: %s', mysql_error()), mysql_errno());
+			throw new system_core_DatabaseException(
+				sprintf('MySQL error: %s', mysql_error()), mysql_errno());
 		}
 		
 		// Store link id for database connection
