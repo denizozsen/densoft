@@ -3,7 +3,7 @@
 /**
  * Services related to routing, such as translation between requests and scripts.
  *
- * @author Deniz …zsen
+ * @author Deniz Ozsen
  */
 class system_web_Router
 {
@@ -40,8 +40,8 @@ class system_web_Router
 			$handlerPathElements = $request->getHandlerPath();
 			$handlerPathCandidate = Configuration::HANDLERS_DIR;
 			for($i = 0; $i < count($handlerPathElements); ++$i) {
-				$element = $handlerPathElements[$i];
-				$handlerPathCandidate .= $element;
+				$element = ucfirst(strtolower($handlerPathElements[$i]));
+				$handlerPathCandidate = strtolower($handlerPathCandidate) . $element;
 				if (is_file("{$handlerPathCandidate}Handler.php")) {
 					require_once("{$handlerPathCandidate}Handler.php");
 					$handlerClassName = "{$element}Handler";
