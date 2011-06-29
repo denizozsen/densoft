@@ -12,7 +12,12 @@ provides the following features:
 - and more.....
 
 
+STATUS
+
+DenSoft is currently in the early development stages.
+
+
 DEPENDENCIES
 
 DenSoft runs on PHP 5.2+.
-DenSoft requires o external libraries.
+DenSoft requires no external libraries.
