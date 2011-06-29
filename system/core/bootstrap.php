@@ -3,8 +3,7 @@
 // Set include path to be the document root
 set_include_path($_SERVER['DOCUMENT_ROOT']);
 
-// TODO - Append the auto-loader to the set of existing auto-loaders
-// Declare auto-loader first, to avoid require statements in following code
+// Create and register auto-loader first, to avoid require statements in following code
 /**
  * Auto-load handler that expects that class names match the full path of the
  * file in which they are declared, with slashes replaced by underscores, e.g.
@@ -13,7 +12,7 @@ set_include_path($_SERVER['DOCUMENT_ROOT']);
  *
  * @param string $className the name of the class to load
  */
-function __autoload($className)
+function densoft_autoload($className)
 {
 	$pathToClassFile = str_replace('_', '/', $className) . '.php';
 	if (file_exists($pathToClassFile)) {
@@ -22,6 +21,7 @@ function __autoload($className)
 		throw new system_core_ClassNotFoundException();
 	}
 }
+spl_autoload_register('densoft_autoload');
 
 // Set configuration appropriate for current environment
 $lowercaseServerName = strtolower($_SERVER['SERVER_NAME']);
