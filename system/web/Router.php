@@ -40,9 +40,9 @@ class system_web_Router
 			for($i = 0; $i < count($handlerPathElements); ++$i) {
 				$element = ucfirst(strtolower($handlerPathElements[$i]));
 				$handlerPathCandidate = strtolower($handlerPathCandidate) . $element;
-				if (is_file("{$handlerPathCandidate}Handler.php")) {
-					require_once("{$handlerPathCandidate}Handler.php");
-					$handlerClassName = "{$element}Handler";
+				if (is_file("{$handlerPathCandidate}.php")) {
+					require_once("{$handlerPathCandidate}.php");
+					$handlerClassName = "handlers_{$element}";
 					$handler = new $handlerClassName();
 					$request->setHandlerPath($handlerPathCandidate);
 					$request->setArguments(array_merge(
@@ -67,15 +67,15 @@ class system_web_Router
 	
 	private function getDefaultHandler()
 	{
-		require_once(Configuration::HANDLERS_DIR . 'DefaultHandler.php');
-		$handlerClassName = 'DefaultHandler';
+		require_once(Configuration::HANDLERS_DIR . 'Default.php');
+		$handlerClassName = 'handlers_Default';
 		return new $handlerClassName();
 	}
 	
 	private function getErrorHandler()
 	{
-		require_once(Configuration::HANDLERS_DIR . 'ErrorHandler.php');
-		$handlerClassName = 'ErrorHandler';
+		require_once(Configuration::HANDLERS_DIR . 'Error.php');
+		$handlerClassName = 'handlers_Error';
 		return new $handlerClassName();
 	}
 	
