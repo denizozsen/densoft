@@ -2,16 +2,16 @@
 
 	<ul>
 		<li>
-        	<label style="width: 20%; float:left" for="name">Name:</label>
-        	<span style="width: 20%;"  type="text" id="name" name="name" value="<?php echo $model->getName() ?>"></span><br />
+        	<label class="tasklabel" for="name">Name:</label>
+        	<div class="taskvalue" id="name" name="name"><?php echo $model->getName() ?></div><br />
 		</li>
 		<li>
-        	<label style="width: 20%; float:left" for="start_date">Start Date:</label>
-        	<span style="width: 20%;" type="text" id="start_date" name="start_date" value="<?php echo $model->getStartDate() ?>"></span><br />
+        	<label class="tasklabel" for="start_date">Start Date:</label>
+        	<div class="taskvalue" id="start_date"><?php echo $model->getStartDate() ?></div><br />
 		</li>
 		<li>
-        	<label for="description">Description:</label>
-        	<p id="description" name="description"><?php echo $model->getDescription() ?></p><br />
+        	<label class="tasklabel" for="description">Description:</label>
+        	<p id="description"><?php echo $model->getDescription() ?></p><br />
 		</li>
 		<li>
         	<a href="/task/<?php echo $model->getId()?>/edit/">Edit</a>

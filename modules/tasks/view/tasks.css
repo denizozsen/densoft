@@ -1,3 +1,7 @@
 @CHARSET "UTF-8";
 
+#task_details { list-style: none; }
+#task_details li { list-style: none; }
+.tasklabel { width: 20%; float:left; }
+.taskvalue { width: 40%; }
 

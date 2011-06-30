@@ -7,6 +7,9 @@ class handlers_Task extends system_web_PageRequestHandler
 	    // Template
 		$page->setTemplate('templates/default.tpl');
 		
+		// Stylesheet
+		$page->addOtherCss('/modules/tasks/view/tasks.css');
+		
 		// Controllers
         $page->addController(system_web_PageRegion::MAIN_NAV,
             $navbarController = new modules_navigation_NavigationLinksController('task', $this->getRequest()));
