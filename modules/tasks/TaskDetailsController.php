@@ -56,7 +56,13 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
 	
     public function handleActions()
     {
-        // TODO - implement
+        if ($_POST['action']) {
+            
+        } elseif ($_POST['action']) {
+            
+        } else {
+            
+        }
     }
     
     public function render(array $renderArgs = array())
@@ -77,7 +83,6 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
         }
         
         $renderArgs['model'] = $this->model;
-        
         $view->render($renderArgs);
     }
     
