@@ -1,12 +1,12 @@
 <?php
 
-class ErrorHandler extends system_web_PageRequestHandler
+class handlers_About extends system_web_PageRequestHandler
 {
 	public function configurePage(system_web_Page $page)
 	{
 		$page->setTemplate('templates/default.tpl');
-		$page->setTitle('Resource not found - ' . Configuration::SITE_NAME);
-		$page->setMainHeading('Resource not found');
+		$page->setTitle('About - ' . Configuration::SITE_NAME);
+		$page->setMainHeading('About');
 		if (!is_null(Configuration::COPANY_LOGO_PATH)) {
 			$rootUrl = Configuration::getInstance()->getRootUrl();
 			$page->setSiteLogo(sprintf('<a href="%s"><img src="%s" /></a>',
@@ -18,23 +18,27 @@ class ErrorHandler extends system_web_PageRequestHandler
 		}
 		
 		$navController =
-			new modules_navigation_NavigationLinksController(null,
+			new modules_navigation_NavigationLinksController('about',
 				system_web_Services::getInstance()->getRequest());
 		$page->addController(system_web_PageRegion::MAIN_NAV, $navController);
 	    
 		///////  THIS CODE SHOULD BE IN SOME CONTROLLER  ////////////
-	    
+		
 		// Generate content
-		$content = <<<EOF
+        $content = <<<EOF
+			<h2>Welcome to the Home Monitor</h2>
 			<p>
-				The requested URL was not found on the server. If you cannot
-				find what you are looking for, please contact the web master or
-				system administrator.
+				[This is where the description of Home Monitor goes.]
+			</p>
+			
+			<h2>Where do I start?</h2>
+			<p>
+				[Here goes a list of pointers: where to start, interesting functionality, etc.]
 			</p>
 EOF;
-	    
+		
 		/////////////////////////////////////////////////////////////////////
-	
+	    
 		$page->addController(system_web_PageRegion::CONTENT,
 			new system_mvc_StaticController($content));
 	}
