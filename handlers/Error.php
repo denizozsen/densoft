@@ -1,12 +1,12 @@
 <?php
 
-class DefaultHandler extends system_web_PageRequestHandler
+class handlers_Error extends system_web_PageRequestHandler
 {
 	public function configurePage(system_web_Page $page)
 	{
 		$page->setTemplate('templates/default.tpl');
-		$page->setTitle('Task List - ' . Configuration::SITE_NAME);
-		$page->setMainHeading('Task List');
+		$page->setTitle('Resource not found - ' . Configuration::SITE_NAME);
+		$page->setMainHeading('Resource not found');
 		if (!is_null(Configuration::COPANY_LOGO_PATH)) {
 			$rootUrl = Configuration::getInstance()->getRootUrl();
 			$page->setSiteLogo(sprintf('<a href="%s"><img src="%s" /></a>',
@@ -21,29 +21,18 @@ class DefaultHandler extends system_web_PageRequestHandler
 			new modules_navigation_NavigationLinksController(null,
 				system_web_Services::getInstance()->getRequest());
 		$page->addController(system_web_PageRegion::MAIN_NAV, $navController);
-	
+	    
 		///////  THIS CODE SHOULD BE IN SOME CONTROLLER  ////////////
-	
-		// Obtain all tasks from db and build up mark-up
-		$db = system_core_Services::getInstance()->getDb();
-		$allTasks = $db->runQueryAndReturnAllRows('SELECT * FROM task');
-		$numTasks = count($allTasks);
-		
-		// Generate tasks table
-		$tasksTableMarkup = '';
-		
+	    
 		// Generate content
 		$content = <<<EOF
-			<h2>Welcome to Home Monitor</h2>
 			<p>
-				[A short introduction]
+				The requested URL was not found on the server. If you cannot
+				find what you are looking for, please contact the web master or
+				system administrator.
 			</p>
-		
-			<h2>Tasks</h2>
-			<p>Number of tasks: {$numTasks}</p>
-			{$tasksTableMarkup}
 EOF;
-	
+	    
 		/////////////////////////////////////////////////////////////////////
 	
 		$page->addController(system_web_PageRegion::CONTENT,

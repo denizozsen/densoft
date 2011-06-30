@@ -1,6 +1,6 @@
 <?php
 
-class TaskHandler extends system_web_PageRequestHandler
+class handlers_Task extends system_web_PageRequestHandler
 {
 	public function configurePage(system_web_Page $page)
 	{

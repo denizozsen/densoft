@@ -1,12 +1,12 @@
 <?php
 
-class AboutHandler extends system_web_PageRequestHandler
+class handlers_Default extends system_web_PageRequestHandler
 {
 	public function configurePage(system_web_Page $page)
 	{
 		$page->setTemplate('templates/default.tpl');
-		$page->setTitle('About - ' . Configuration::SITE_NAME);
-		$page->setMainHeading('About');
+		$page->setTitle('Task List - ' . Configuration::SITE_NAME);
+		$page->setMainHeading('Task List');
 		if (!is_null(Configuration::COPANY_LOGO_PATH)) {
 			$rootUrl = Configuration::getInstance()->getRootUrl();
 			$page->setSiteLogo(sprintf('<a href="%s"><img src="%s" /></a>',
@@ -18,27 +18,34 @@ class AboutHandler extends system_web_PageRequestHandler
 		}
 		
 		$navController =
-			new modules_navigation_NavigationLinksController('about',
+			new modules_navigation_NavigationLinksController(null,
 				system_web_Services::getInstance()->getRequest());
 		$page->addController(system_web_PageRegion::MAIN_NAV, $navController);
-	    
+	
 		///////  THIS CODE SHOULD BE IN SOME CONTROLLER  ////////////
+	
+		// Obtain all tasks from db and build up mark-up
+		$db = system_core_Services::getInstance()->getDb();
+		$allTasks = $db->runQueryAndReturnAllRows('SELECT * FROM task');
+		$numTasks = count($allTasks);
+		
+		// Generate tasks table
+		$tasksTableMarkup = '';
 		
 		// Generate content
-        $content = <<<EOF
-			<h2>Welcome to the Home Monitor</h2>
+		$content = <<<EOF
+			<h2>Welcome to Home Monitor</h2>
 			<p>
-				[This is where the description of Home Monitor goes.]
+				[A short introduction]
 			</p>
-			
-			<h2>Where do I start?</h2>
-			<p>
-				[Here goes a list of pointers: where to start, interesting functionality, etc.]
-			</p>
-EOF;
 		
+			<h2>Tasks</h2>
+			<p>Number of tasks: {$numTasks}</p>
+			{$tasksTableMarkup}
+EOF;
+	
 		/////////////////////////////////////////////////////////////////////
-	    
+	
 		$page->addController(system_web_PageRegion::CONTENT,
 			new system_mvc_StaticController($content));
 	}
