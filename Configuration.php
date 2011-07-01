@@ -7,7 +7,8 @@
  */
 abstract class Configuration
 {
-	const HANDLERS_DIR         = 'handlers/';
+	const HANDLERS_PREFIX      = 'handlers';
+	const DEFAULT_HANDLER_NAME = 'Default';
 	const ERROR_HANDLER_NAME   = 'Error';
 	const HOMEPAGE_SCRIPT_PATH = 'handlers/tasklist.php';
 	const SITE_NAME            = 'Home Monitor';

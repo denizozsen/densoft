@@ -36,21 +36,25 @@ class system_web_Router
 		else {
 			// Find handler class in handlers directory
 			$handlerPathElements = $request->getHandlerPath();
-			$handlerPathCandidate = Configuration::HANDLERS_DIR;
+			$handlerPathCandidate = Configuration::HANDLERS_PREFIX . '/';
+			$handlerClassNameCandidate = Configuration::HANDLERS_PREFIX;
+			
 			for($i = 0; $i < count($handlerPathElements); ++$i) {
+				
 				$element = ucfirst(strtolower($handlerPathElements[$i]));
 				$handlerPathCandidate = strtolower($handlerPathCandidate) . $element;
+				$handlerClassNameCandidate = strtolower($handlerClassNameCandidate) . '_' . $element;
 				if (is_file("{$handlerPathCandidate}.php")) {
-					require_once("{$handlerPathCandidate}.php");
-					$handlerClassName = "handlers_{$element}";
-					$handler = new $handlerClassName();
+					//$handlerClassName = "handlers_{$element}";
+					$handler = new $handlerClassNameCandidate();
 					$request->setHandlerPath($handlerPathCandidate);
-					$request->setArguments(array_merge(
+					$request->setArguments( array_merge(
 						array_slice($handlerPathElements, $i+1),
 						$request->getArguments()) );
 					break;
 				}
 				$handlerPathCandidate .= '/';
+				
 			}
 		}
 		
@@ -67,14 +71,12 @@ class system_web_Router
 	
 	private function getDefaultHandler()
 	{
-		require_once(Configuration::HANDLERS_DIR . 'Default.php');
 		$handlerClassName = 'handlers_Default';
 		return new $handlerClassName();
 	}
 	
 	private function getErrorHandler()
 	{
-		require_once(Configuration::HANDLERS_DIR . 'Error.php');
 		$handlerClassName = 'handlers_Error';
 		return new $handlerClassName();
 	}
