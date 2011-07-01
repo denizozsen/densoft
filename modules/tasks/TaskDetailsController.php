@@ -56,13 +56,15 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
 	
     public function handleActions()
     {
-        if ($_POST['action']) {
-            
-        } elseif ($_POST['action']) {
-            
-        } else {
-            
-        }
+    	if (isset($_POST['action'])) {
+	        if ($_POST['action']) {
+	            
+	        } elseif ($_POST['action']) {
+	            
+	        } else {
+	            
+	        }
+    	}
     }
     
     public function render(array $renderArgs = array())
