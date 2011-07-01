@@ -21,7 +21,7 @@ class modules_tasks_model_Task
 	public function __construct()
 	{
 		$this->id           = -1;
-		$this->name         = 'Untitled Task';
+		$this->name         = 'Untitled';
 		$this->description  = '';
 		$this->startDate    = date('d:m:Y');
 	}

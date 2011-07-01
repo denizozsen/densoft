@@ -18,8 +18,8 @@ class handlers_Task extends system_web_PageRequestHandler
 		
         // Page settings
         $taskName = $taskDetailsController->getModel()->getName();
-        $page->setTitle("Task: '{$taskName}' - " . Configuration::SITE_NAME);
-		$page->setMainHeading("Task: '{$taskName}'");
+        $page->setTitle("Task: {$taskName} - " . Configuration::SITE_NAME);
+		$page->setMainHeading("Task: {$taskName}");
 		
 		// Site Logo
 		if (!is_null(Configuration::COPANY_LOGO_PATH)) {
