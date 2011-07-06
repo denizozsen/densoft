@@ -1,2 +1,4 @@
+ErrorDocument 404 /Error/
+
 RewriteEngine On
 RewriteRule !\.(js|ico|txt|gif|jpg|png|css)$ application.php
