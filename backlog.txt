@@ -1,5 +1,15 @@
 TO DO
 
+- Change how Configuration works:
+  -> make each configuration setting a method, e.g. handlersPrefix(),
+     defaultHandlerPath() or siteName()
+     -> This way each setting can be overridden by a Configuration sub-class
+- Move service instantiation (e.g. Database, MasterRepository, Router, Request)
+  out of Configuration and into the respective Services class
+  (system_core_Services or web_Services). Instantiate the Services classes from
+  within the bootstrapper code to allow for different Services implementations
+  (e.g. for mocking in unit tests).
+
 - Create Response
 - Create CachedRepository
   -> two choices as cache: 1) request-level cache (context) 2) real cache (memcache)
