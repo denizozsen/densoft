@@ -5,16 +5,16 @@ class handlers_admin_About extends system_web_PageRequestHandler
 	public function configurePage(system_web_Page $page)
 	{
 		$page->setTemplate('templates/default.tpl');
-		$page->setTitle('About - ' . Configuration::SITE_NAME);
+		$page->setTitle('About - ' . Configuration::getInstance()->siteName());
 		$page->setMainHeading('About');
-		if (!is_null(Configuration::COPANY_LOGO_PATH)) {
+		if (!is_null(Configuration::getInstance()->companyLogoPath())) {
 			$rootUrl = Configuration::getInstance()->getRootUrl();
 			$page->setSiteLogo(sprintf('<a href="%s"><img src="%s" /></a>',
-				$rootUrl, $rootUrl . Configuration::COPANY_LOGO_PATH));
+				$rootUrl, $rootUrl . Configuration::getInstance()->companyLogoPath()));
 		}
-		if (!is_null(Configuration::FOOTER_HTML)) {
+		if (!is_null(Configuration::getInstance()->footerHtml())) {
 			$page->addController(system_web_PageRegion::FOOTER,
-				new system_mvc_StaticController(Configuration::FOOTER_HTML));
+				new system_mvc_StaticController(Configuration::getInstance()->footerHtml()));
 		}
 		
 		$navController =

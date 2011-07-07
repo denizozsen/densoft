@@ -7,15 +7,6 @@
  */
 abstract class Configuration
 {
-	const HANDLERS_PREFIX      = 'handlers';
-	const DEFAULT_HANDLER_NAME = 'Default';
-	const ERROR_HANDLER_NAME   = 'Error';
-	const HOMEPAGE_SCRIPT_PATH = 'handlers/tasklist.php';
-	const SITE_NAME            = 'Home Monitor';
-	const THEME_PATH           = 'themes/basic/theme.css';
-	const COPANY_LOGO_PATH     = 'themes/basic/company_logo.gif';
-	const FOOTER_HTML          = 'Copyright DenSoft (c) 2011';
-	
 	private static $instance;
 	
 	private $requestToScriptTable;
@@ -47,6 +38,20 @@ abstract class Configuration
 		self::$instance = $instance;
 	}
 	
+	public function handlersPrefix() { return 'handlers'; }
+
+	public function defaultHandlerName() { return 'Default'; }
+
+	public function errorHandlerName() { return 'Error'; }
+
+	public function siteName() { return 'Home Monitor'; }
+
+	public function themePath() { return 'themes/basic/theme.css'; }
+	
+	public function companyLogoPath() { return 'themes/basic/company_logo.gif'; }
+
+	public function footerHtml() { return 'Copyright DenSoft (c) 2011'; }
+	
 	public function createCoreDatabase()
 	{
 		return new system_core_Database();
@@ -72,7 +77,7 @@ abstract class Configuration
 		return new system_web_Page();
 	}
 	
-	// Settings differ according to environment (local, test, live)
+	// The following settings differ according to environment (local, test, live)
 	public abstract function getIncludePath();
 	public abstract function getRootUrl();
 	public abstract function getDbServer();

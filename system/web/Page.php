@@ -29,10 +29,10 @@ class system_web_Page extends system_mvc_View
 		$this->regionControllers[system_web_PageRegion::FOOTER]       = new system_mvc_CompositeController();
 
 		// Set default theme CSS path, if set in Configuration)
-		if (!is_null(Configuration::THEME_PATH)) {
+		if (!is_null(Configuration::getInstance()->themePath())) {
 			$this->themeCss =
 				Configuration::getInstance()->getRootUrl()
-					. Configuration::THEME_PATH;
+					. Configuration::getInstance()->themePath();
 		}
 	}
 
