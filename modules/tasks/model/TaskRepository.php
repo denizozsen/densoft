@@ -15,13 +15,13 @@ class modules_tasks_model_TaskRepository implements system_core_Repository
 		if (!is_int($key) || ($key <= 0)) {
 			throw new Exception("Key must be a positive integer, was: {$key}");
 		}
-
+		
 		$taskRow =
 			system_core_Services::getInstance()->getDb()->runSingleRowQuery("
 			SELECT id, name, description, start_date
 				FROM task
 				WHERE id = {$key}");
-
+		
 		return self::createTaskFromRecord($taskRow);
 	}
 	
@@ -48,14 +48,15 @@ class modules_tasks_model_TaskRepository implements system_core_Repository
 		return $allTasks;
 	}
 	
-	public function add(modules_tasks_model_Task $task)
+	public function add($task)
 	{
 		system_core_Services::getInstance()->getDb()->runQuery("
-			INSERT INTO task (id, name, description, start_date)
-				VALUES ({$task->getId()}, {$task->getName()}, {$task->getDescription()}, {$task->getCreationDate()})");
+			INSERT INTO task (name, description, start_date)
+				VALUES ('{$task->getName()}', '{$task->getDescription()}', '{$task->getStartDate()}')");
+		$task->setId(system_core_Services::getInstance()->getDb()->lastInsertId());
 	}
-
-	public function saveChanges(modules_tasks_model_Task $task)
+	
+	public function saveChanges($task)
 	{
 		system_core_Services::getInstance()->getDb()->runQuery("
 			UPDATE task
@@ -64,25 +65,25 @@ class modules_tasks_model_TaskRepository implements system_core_Repository
 					start_date = '{$task->getStartDate()}'
 				WHERE id = {$task->getId()}");
 	}
-
-	public function remove(modules_tasks_model_Task $task)
+	
+	public function remove($task)
 	{
 		$this->removeByKey($task->getId());
 	}
-
+	
 	public function removeByKey($key)
 	{
 		system_core_Services::getInstance()->getDb()
 			->runQuery("DELETE FROM task WHERE id = {$key}");
 	}
-
+	
 	private static function createTaskFromRecord($record)
 	{
-		$task = new self();
+		$task = new modules_tasks_model_Task();
 		$task->setId($record['id']);
 		$task->setName($record['name']);
 		$task->setDescription($record['description']);
-		$task->setCreationDate($record['start_date']);
+		$task->setStartDate($record['start_date']);
 		return $task;
 	}
 }
