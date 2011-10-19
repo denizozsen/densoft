@@ -42,6 +42,11 @@ class system_core_Database
 		return mysql_query($query, $this->linkId);
 	}
 	
+	public function lastInsertId()
+	{
+		return mysql_insert_id($this->linkId);
+	}
+	
 	public function numRows($queryResult)
 	{
 		return mysql_num_rows($queryResult);

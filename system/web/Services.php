@@ -1,7 +1,8 @@
 <?php
 
 /**
- * The container for Web-level services, such as the database API.
+ * The container for Web-level services, such as the Router, Request and
+ * Response objects.
  *
  * @author Deniz Ozsen
  */

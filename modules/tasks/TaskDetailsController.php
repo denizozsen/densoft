@@ -28,8 +28,8 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
 		    if (-1 == $taskId) {
 		        $this->model = new modules_tasks_model_Task();
 		    } else {
-    			$this->model =
-    				modules_tasks_model_Task::retrieveFromDb($this->getTaskIdFromRequest());
+		    	$repo = new modules_tasks_model_TaskRepository();
+    			$this->model = $repo->getByKey($this->getTaskIdFromRequest());
 		    }
 		    
 		}
@@ -58,11 +58,24 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
     {
     	if (isset($_POST['command'])) {
 	        if ('create' == $_POST['command']) {
-	            modules_tasks_model_Task::insertToDb(
-	                $_POST['name'], $_POST['description'], $_POST['start_date']);
+	        	
+	        	$this->validateCreateTaskRequest();
+	            $name = $_POST['name'];
+	            $description = $_POST['description'];
+	            $startDate = $_POST['start_date'];
+	        	
+	        	$newTask = new modules_tasks_model_Task();
+	        	$newTask->setName($name);
+	        	$newTask->setDescription($description);
+	        	$newTask->setStartDate($startDate);
+	        	
+	        	$repo = new modules_tasks_model_TaskRepository();
+	        	$repo->add($newTask);
+	        	
+	        	system_web_Services::getInstance()->getRouter()->redirectTo(
+	        		"task/?task_id={$newTask->getId()}");
 	        } elseif ('update' == $_POST['command']) {
-	            modules_tasks_model_Task::updateDb(
-	                $_POST['id'], $_POST['name'], $_POST['description'], $_POST['start_date']);
+	            
 	        } else {
 	            // TODO - log invalid command
 	        }
@@ -93,13 +106,13 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
     private function getTaskIdFromRequest()
     {
         // If task id is not specified, return -1 to  indicate create task form
-        if (!isset($_GET['id'])) {
+        if (!isset($_GET['task_id'])) {
             return -1;
         }
         
         // Get task id argument
         // TODO - use the request argument mechanisms of class system_web_Request
-        $rawTaskId = $_GET['id'];
+        $rawTaskId = $_GET['task_id'];
         
         // If task id argument is not an integer, redirect to home page
         if ((string)(int)$rawTaskId !== $rawTaskId) {
@@ -108,5 +121,10 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
         
         // Return task id as integer
         return intval($rawTaskId);
+    }
+    
+    private function validateCreateTaskRequest()
+    {
+    	// TODO - implement validateCreateTaskRequest()
     }
 }
