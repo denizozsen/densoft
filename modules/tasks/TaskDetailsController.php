@@ -56,13 +56,15 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
 	
     public function handleActions()
     {
-    	if (isset($_POST['action'])) {
-	        if ($_POST['action']) {
-	            
-	        } elseif ($_POST['action']) {
-	            
+    	if (isset($_POST['command'])) {
+	        if ('create' == $_POST['command']) {
+	            modules_tasks_model_Task::insertToDb(
+	                $_POST['name'], $_POST['description'], $_POST['start_date']);
+	        } elseif ('update' == $_POST['command']) {
+	            modules_tasks_model_Task::updateDb(
+	                $_POST['id'], $_POST['name'], $_POST['description'], $_POST['start_date']);
 	        } else {
-	            
+	            // TODO - log invalid command
 	        }
     	}
     }
@@ -91,13 +93,13 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
     private function getTaskIdFromRequest()
     {
         // If task id is not specified, return -1 to  indicate create task form
-        if (!isset($_GET['task_id'])) {
+        if (!isset($_GET['id'])) {
             return -1;
         }
         
         // Get task id argument
         // TODO - use the request argument mechanisms of class system_web_Request
-        $rawTaskId = $_GET['task_id'];
+        $rawTaskId = $_GET['id'];
         
         // If task id argument is not an integer, redirect to home page
         if ((string)(int)$rawTaskId !== $rawTaskId) {

@@ -2,6 +2,6 @@
 
 #task_details { list-style: none; }
 #task_details li { list-style: none; }
-.tasklabel { width: 20%; float:left; }
-.taskvalue { width: 40%; }
-
+.task_label_bold { width: 20%; float:left; font-weight: bold; }
+.task_label { width: 20%; float:left; }
+.task_value { width: 40%; }

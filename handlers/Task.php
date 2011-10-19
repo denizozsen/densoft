@@ -18,20 +18,20 @@ class handlers_Task extends system_web_PageRequestHandler
 		
         // Page settings
         $taskName = $taskDetailsController->getModel()->getName();
-        $page->setTitle("Task: {$taskName} - " . Configuration::SITE_NAME);
-		$page->setMainHeading("Task: {$taskName}");
+        $page->setTitle("Task: '{$taskName}' - " . Configuration::getInstance()->siteName());
+		$page->setMainHeading("Task: '{$taskName}'");
 		
 		// Site Logo
-		if (!is_null(Configuration::COPANY_LOGO_PATH)) {
+		if (!is_null(Configuration::getInstance()->companyLogoPath())) {
 			$rootUrl = Configuration::getInstance()->getRootUrl();
 			$page->setSiteLogo(sprintf('<a href="%s"><img src="%s" /></a>',
-				$rootUrl, $rootUrl . Configuration::COPANY_LOGO_PATH));
+				$rootUrl, $rootUrl . Configuration::getInstance()->companyLogoPath()));
 		}
 		
 		// Footer
-		if (!is_null(Configuration::FOOTER_HTML)) {
+		if (!is_null(Configuration::getInstance()->footerHtml())) {
 			$page->addController(system_web_PageRegion::FOOTER,
-				new system_mvc_StaticController(Configuration::FOOTER_HTML));
+				new system_mvc_StaticController(Configuration::getInstance()->footerHtml()));
 		}
 	}
 }

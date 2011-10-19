@@ -1,9 +1,11 @@
 <?php
 
+// TODO - implement input sanitisation in class modules_tasks_model_TaskRepository
+
 /**
  * The repository for Task entities.
  *
- * @author Deniz …zsen
+ * @author Deniz Ozsen
  */
 class modules_tasks_model_TaskRepository implements system_core_Repository
 {
@@ -14,53 +16,52 @@ class modules_tasks_model_TaskRepository implements system_core_Repository
 			throw new Exception("Key must be a positive integer, was: {$key}");
 		}
 
-		$db = system_core_Services::getInstance()->getDb();
-		$taskRow = $db->runSingleRowQuery("
-			SELECT id, name, description, creation_date
+		$taskRow =
+			system_core_Services::getInstance()->getDb()->runSingleRowQuery("
+			SELECT id, name, description, start_date
 				FROM task
 				WHERE id = {$key}");
 
-		return self::createTaskFromRowArray($taskRow);
+		return self::createTaskFromRecord($taskRow);
 	}
-
+	
 	public function getBySpecification($specification)
 	{
 		// TODO - implement modules_tasks_model_TaskRepository::getBySpecification($specification)
 	}
-
+	
 	public function getAll()
 	{
 		$db = system_core_Services::getInstance()->getDb();
+		
 		$taskQueryResult = $db->runQuery("
-			SELECT id, name, description, creation_date
+			SELECT id, name, description, start_date
 				FROM task
 				WHERE id = {$key}");
-
+		
 		$allTasks = array();
-
+		
 		while($taskRow = $db->fetchNextArray($taskQueryResult)) {
-			$allTasks[] = self::createTaskFromRowArray($taskRow);
+			$allTasks[] = self::createTaskFromRecord($taskRow);
 		}
-
+		
 		return $allTasks;
 	}
-
+	
 	public function add(modules_tasks_model_Task $task)
 	{
-		$db = system_core_Services::getInstance()->getDb();
-		$db->runQuery("
-			INSERT INTO task (id, name, description, creation_date)
+		system_core_Services::getInstance()->getDb()->runQuery("
+			INSERT INTO task (id, name, description, start_date)
 				VALUES ({$task->getId()}, {$task->getName()}, {$task->getDescription()}, {$task->getCreationDate()})");
 	}
 
 	public function saveChanges(modules_tasks_model_Task $task)
 	{
-		$db = system_core_Services::getInstance()->getDb();
-		$db->runQuery("
+		system_core_Services::getInstance()->getDb()->runQuery("
 			UPDATE task
 				SET name          = '{$task->getName()}',
 					description   = '{$task->getDescription()}',
-					creation_date = '{$task->getCreationDate()}'
+					start_date = '{$task->getStartDate()}'
 				WHERE id = {$task->getId()}");
 	}
 
@@ -71,16 +72,17 @@ class modules_tasks_model_TaskRepository implements system_core_Repository
 
 	public function removeByKey($key)
 	{
-		$db->runQuery("DELETE FROM task WHERE id = {$key}");
+		system_core_Services::getInstance()->getDb()
+			->runQuery("DELETE FROM task WHERE id = {$key}");
 	}
 
-	private static function createTaskFromRowArray($rowArray)
+	private static function createTaskFromRecord($record)
 	{
 		$task = new self();
-		$task->setId($taskId);
-		$task->setName($taskRow['name']);
-		$task->setDescription($taskRow['description']);
-		$task->setCreationDate($taskRow['creation_date']);
+		$task->setId($record['id']);
+		$task->setName($record['name']);
+		$task->setDescription($record['description']);
+		$task->setCreationDate($record['start_date']);
 		return $task;
 	}
 }
