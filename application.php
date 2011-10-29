@@ -2,7 +2,7 @@
 
 // Perform bootstrapping, such as setting up which configuration to use,
 // the include path, error handlers etc
-include 'system/core/bootstrap.php';
+include 'bootstrap.php';
 
 // Obtain the request object
 $request = system_web_Services::instance()->getRequest();
