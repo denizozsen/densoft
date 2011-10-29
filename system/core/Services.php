@@ -28,7 +28,7 @@ class system_core_Services
 	{
 		if (is_null($this->db)) {
 			$config = Configuration::instance();
-			$this->db = $config->createCoreDatabase();
+			$this->db = new system_core_Database();
 			$this->db->connect(
 				$config->dbServer(),
 				$config->dbUserName(),
@@ -42,8 +42,7 @@ class system_core_Services
 	public function getMasterRepository()
 	{
 		if (is_null($this->masterRepository)) {
-			$this->masterRepository =
-				Configuration::instance()->createCoreMasterRepository();
+			$this->masterRepository = new system_core_MasterRepository();
 		}
 		
 		return $this->masterRepository;

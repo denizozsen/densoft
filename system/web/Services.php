@@ -29,7 +29,7 @@ class system_web_Services
 	public function getRouter()
 	{
 		if (is_null($this->router)) {
-			$this->router = Configuration::instance()->createWebRouter();
+			$this->router = new system_web_Router();
 		}
 		
 		return $this->router;
@@ -38,7 +38,7 @@ class system_web_Services
 	public function getRequest()
 	{
 		if (is_null($this->request)) {
-			$this->request = Configuration::instance()->createWebRequest();
+			$this->request = new system_web_Request();
 		}
 		
 		return $this->request;
@@ -47,7 +47,7 @@ class system_web_Services
 	public function getPage()
 	{
 		if (is_null($this->page)) {
-			$this->page = Configuration::instance()->createWebPage();
+			$this->page = new system_web_Page();
 		}
 		
 		return $this->page;

@@ -60,29 +60,4 @@ abstract class Configuration
 	public abstract function dbPassword();
 	public abstract function dbName();
 	public abstract function timezone();
-
-	public function createCoreDatabase()
-	{
-		return new system_core_Database();
-	}
-	
-	public function createCoreMasterRepository()
-	{
-		return new system_core_MasterRepository();
-	}
-	
-	public function createWebRouter()
-	{
-		return new system_web_Router();
-	}
-	
-	public function createWebRequest()
-	{
-		return new system_web_Request();
-	}
-	
-	public function createWebPage()
-	{
-		return new system_web_Page();
-	}
 }
