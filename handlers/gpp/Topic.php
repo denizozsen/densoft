@@ -6,14 +6,14 @@ class handlers_gpp_Topic extends system_web_PageRequestHandler
 	{
 		$page->setTemplate('templates/default.tpl');
 		$page->setMainHeading('Good Programming Practices');
-		if (!is_null(Configuration::getInstance()->companyLogoPath())) {
-			$rootUrl = Configuration::getInstance()->getRootUrl();
+		if (!is_null(Configuration::instance()->companyLogoPath())) {
+			$rootUrl = Configuration::instance()->rootUrl();
 			$page->setSiteLogo(sprintf('<a href="%s"><img src="%s" /></a>',
-				$rootUrl, $rootUrl . Configuration::getInstance()->companyLogoPath()));
+				$rootUrl, $rootUrl . Configuration::instance()->companyLogoPath()));
 		}
-		if (!is_null(Configuration::getInstance()->footerHtml())) {
+		if (!is_null(Configuration::instance()->footerHtml())) {
 			$page->addController(system_web_PageRegion::FOOTER,
-				new system_mvc_StaticController(Configuration::getInstance()->footerHtml()));
+				new system_mvc_StaticController(Configuration::instance()->footerHtml()));
 		}
 		
 		$navController =

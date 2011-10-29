@@ -15,37 +15,37 @@ class config_LiveConfiguration extends Configuration
 	const DB_NAME      = '';
 	const TIMEZONE     = 'Europe/London';
 	
-	public function getIncludePath()
+	public function includePath()
 	{
 		return self::INCLUDE_PATH;
 	}
 
-	public function getRootUrl()
+	public function rootUrl()
 	{
 		return self::ROOT_URL;
 	}
 	
-	public function getDbServer()
+	public function dbServer()
 	{
 		return self::DB_SERVER;
 	}
 
-	public function getDbUserName()
+	public function dbUserName()
 	{
 		return self::DB_USERNAME;
 	}
 
-	public function getDbPassword()
+	public function dbPassword()
 	{
 		return self::DB_PASSWORD;
 	}
 
-	public function getDbName()
+	public function dbName()
 	{
 		return self::DB_NAME;
 	}
 	
-	public function getTimezone()
+	public function timezone()
 	{
 	    return self::TIMEZONE;
 	}

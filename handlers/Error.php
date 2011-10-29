@@ -5,16 +5,16 @@ class handlers_Error extends system_web_PageRequestHandler
 	public function configurePage(system_web_Page $page)
 	{
 		$page->setTemplate('templates/default.tpl');
-		$page->setTitle('Resource not found - ' . Configuration::getInstance()->siteName());
+		$page->setTitle('Resource not found - ' . Configuration::instance()->siteName());
 		$page->setMainHeading('Resource not found');
-		if (!is_null(Configuration::getInstance()->companyLogoPath())) {
-			$rootUrl = Configuration::getInstance()->getRootUrl();
+		if (!is_null(Configuration::instance()->companyLogoPath())) {
+			$rootUrl = Configuration::instance()->rootUrl();
 			$page->setSiteLogo(sprintf('<a href="%s"><img src="%s" /></a>',
-				$rootUrl, $rootUrl . Configuration::getInstance()->companyLogoPath()));
+				$rootUrl, $rootUrl . Configuration::instance()->companyLogoPath()));
 		}
-		if (!is_null(Configuration::getInstance()->footerHtml())) {
+		if (!is_null(Configuration::instance()->footerHtml())) {
 			$page->addController(system_web_PageRegion::FOOTER,
-				new system_mvc_StaticController(Configuration::getInstance()->footerHtml()));
+				new system_mvc_StaticController(Configuration::instance()->footerHtml()));
 		}
 		
 		$navController =

@@ -36,8 +36,8 @@ class system_web_Router
 		else {
 			// Find handler class in handlers directory
 			$handlerPathElements = $request->getHandlerPath();
-			$handlerPathCandidate = Configuration::getInstance()->handlersPrefix() . '/';
-			$handlerClassNameCandidate = Configuration::getInstance()->handlersPrefix();
+			$handlerPathCandidate = Configuration::instance()->handlersPrefix() . '/';
+			$handlerClassNameCandidate = Configuration::instance()->handlersPrefix();
 			
 			for($i = 0; $i < count($handlerPathElements); ++$i) {
 				
@@ -71,13 +71,13 @@ class system_web_Router
 	
 	private function getDefaultHandler()
 	{
-		$handlerClassName = 'handlers_' . Configuration::getInstance()->defaultHandlerName();
+		$handlerClassName = 'handlers_' . Configuration::instance()->defaultHandlerName();
 		return new $handlerClassName();
 	}
 	
 	private function getErrorHandler()
 	{
-		$handlerClassName = 'handlers_' . Configuration::getInstance()->errorHandlerName();
+		$handlerClassName = 'handlers_' . Configuration::instance()->errorHandlerName();
 		return new $handlerClassName();
 	}
 	

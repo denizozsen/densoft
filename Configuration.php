@@ -17,7 +17,7 @@ abstract class Configuration
 	 *
 	 * @return Configuration
 	 */
-	public static function getInstance()
+	public static function instance()
 	{
 		if (self::$instance == null) {
 			throw new Exception(
@@ -51,7 +51,16 @@ abstract class Configuration
 	public function companyLogoPath() { return 'themes/basic/company_logo.gif'; }
 
 	public function footerHtml() { return 'Copyright DenSoft (c) 2011'; }
-	
+		
+	// The following settings differ according to environment (local, test, live)
+	public abstract function getIncludePath();
+	public abstract function getRootUrl();
+	public abstract function getDbServer();
+	public abstract function getDbUserName();
+	public abstract function getDbPassword();
+	public abstract function getDbName();
+	public abstract function getTimezone();
+
 	public function createCoreDatabase()
 	{
 		return new system_core_Database();
@@ -76,13 +85,4 @@ abstract class Configuration
 	{
 		return new system_web_Page();
 	}
-	
-	// The following settings differ according to environment (local, test, live)
-	public abstract function getIncludePath();
-	public abstract function getRootUrl();
-	public abstract function getDbServer();
-	public abstract function getDbUserName();
-	public abstract function getDbPassword();
-	public abstract function getDbName();
-	public abstract function getTimezone();
 }

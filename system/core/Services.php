@@ -27,13 +27,13 @@ class system_core_Services
 	public function getDb()
 	{
 		if (is_null($this->db)) {
-			$config = Configuration::getInstance();
+			$config = Configuration::instance();
 			$this->db = $config->createCoreDatabase();
 			$this->db->connect(
-				$config->getDbServer(),
-				$config->getDbUserName(),
-        		$config->getDbPassword(),
-        		$config->getDbName());
+				$config->dbServer(),
+				$config->dbUserName(),
+        		$config->dbPassword(),
+        		$config->dbName());
 		}
 		
 		return $this->db;
@@ -43,7 +43,7 @@ class system_core_Services
 	{
 		if (is_null($this->masterRepository)) {
 			$this->masterRepository =
-				Configuration::getInstance()->createCoreMasterRepository();
+				Configuration::instance()->createCoreMasterRepository();
 		}
 		
 		return $this->masterRepository;
