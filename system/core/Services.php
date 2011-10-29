@@ -15,7 +15,7 @@ class system_core_Services
 	/**
 	 * Retrieves the singleton instance.
 	 */
-	public static function getInstance()
+	public static function instance()
 	{
 		if (is_null(self::$instance)) {
 			self::$instance = new self();

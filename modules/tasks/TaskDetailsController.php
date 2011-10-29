@@ -72,7 +72,7 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
 	        	$repo = new modules_tasks_model_TaskRepository();
 	        	$repo->add($newTask);
 	        	
-	        	system_web_Services::getInstance()->getRouter()->redirectTo(
+	        	system_web_Services::instance()->getRouter()->redirectTo(
 	        		"task/?task_id={$newTask->getId()}");
 	        } elseif ('update' == $_POST['command']) {
 	            
@@ -116,7 +116,7 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
         
         // If task id argument is not an integer, redirect to home page
         if ((string)(int)$rawTaskId !== $rawTaskId) {
-            system_web_Services::getInstance()->getRouter()->redirectTo('/');
+            system_web_Services::instance()->getRouter()->redirectTo('/');
         }
         
         // Return task id as integer

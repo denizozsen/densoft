@@ -14,13 +14,13 @@ class modules_tasks_model_Task
     
 	public static function retrieveCountFromDb()
 	{
-		return system_core_Services::getInstance()->getDb()
+		return system_core_Services::instance()->getDb()
 			->runSingleValueQuery('SELECT COUNT(1) FROM task');
 	}
     
 	public static function retrieveFromDb($id)
 	{
-		$row = system_core_Services::getInstance()->getDb()->runSingleRowQuery("
+		$row = system_core_Services::instance()->getDb()->runSingleRowQuery("
 				SELECT id, name, description, start_date
 					FROM task WHERE id = {$id}");
 		
@@ -35,14 +35,14 @@ class modules_tasks_model_Task
     
 	public static function insertToDb($name, $description, $startDate)
 	{
-	    system_core_Services::getInstance()->getDb()->runQuery(
+	    system_core_Services::instance()->getDb()->runQuery(
 	        "INSERT INTO task(name, description, start_date)
 	        	VALUES({$name}, {$description}, {$startDate})");
 	}
 	
 	public static function updateDb($id, $name, $description, $startDate)
 	{
-	    system_core_Services::getInstance()->getDb()->runQuery(
+	    system_core_Services::instance()->getDb()->runQuery(
 	        "UPDATE 
 	        	SET name        = '{$name}',
 	        		description = '{$description}',

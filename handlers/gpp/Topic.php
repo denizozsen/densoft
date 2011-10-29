@@ -18,7 +18,7 @@ class handlers_gpp_Topic extends system_web_PageRequestHandler
 		
 		$navController =
 			new modules_navigation_NavigationLinksController(null,
-				system_web_Services::getInstance()->getRequest());
+				system_web_Services::instance()->getRequest());
 		$page->addController(system_web_PageRegion::MAIN_NAV, $navController);
 	
 		///////  PLACEHOLDER CONTENT (will be deleted later)  ////////////

@@ -17,7 +17,7 @@ class modules_tasks_model_TaskRepository implements system_core_Repository
 		}
 		
 		$taskRow =
-			system_core_Services::getInstance()->getDb()->runSingleRowQuery("
+			system_core_Services::instance()->getDb()->runSingleRowQuery("
 			SELECT id, name, description, start_date
 				FROM task
 				WHERE id = {$key}");
@@ -32,7 +32,7 @@ class modules_tasks_model_TaskRepository implements system_core_Repository
 	
 	public function getAll()
 	{
-		$db = system_core_Services::getInstance()->getDb();
+		$db = system_core_Services::instance()->getDb();
 		
 		$taskQueryResult = $db->runQuery("
 			SELECT id, name, description, start_date
@@ -50,15 +50,15 @@ class modules_tasks_model_TaskRepository implements system_core_Repository
 	
 	public function add($task)
 	{
-		system_core_Services::getInstance()->getDb()->runQuery("
+		system_core_Services::instance()->getDb()->runQuery("
 			INSERT INTO task (name, description, start_date)
 				VALUES ('{$task->getName()}', '{$task->getDescription()}', '{$task->getStartDate()}')");
-		$task->setId(system_core_Services::getInstance()->getDb()->lastInsertId());
+		$task->setId(system_core_Services::instance()->getDb()->lastInsertId());
 	}
 	
 	public function saveChanges($task)
 	{
-		system_core_Services::getInstance()->getDb()->runQuery("
+		system_core_Services::instance()->getDb()->runQuery("
 			UPDATE task
 				SET name          = '{$task->getName()}',
 					description   = '{$task->getDescription()}',
@@ -73,7 +73,7 @@ class modules_tasks_model_TaskRepository implements system_core_Repository
 	
 	public function removeByKey($key)
 	{
-		system_core_Services::getInstance()->getDb()
+		system_core_Services::instance()->getDb()
 			->runQuery("DELETE FROM task WHERE id = {$key}");
 	}
 	

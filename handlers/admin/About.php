@@ -19,7 +19,7 @@ class handlers_admin_About extends system_web_PageRequestHandler
 		
 		$navController =
 			new modules_navigation_NavigationLinksController('about',
-				system_web_Services::getInstance()->getRequest());
+				system_web_Services::instance()->getRequest());
 		$page->addController(system_web_PageRegion::MAIN_NAV, $navController);
 	    
 		///////  THIS CODE SHOULD BE IN SOME CONTROLLER  ////////////

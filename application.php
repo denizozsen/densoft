@@ -5,19 +5,19 @@
 include 'system/core/bootstrap.php';
 
 // Obtain the request object
-$request = system_web_Services::getInstance()->getRequest();
+$request = system_web_Services::instance()->getRequest();
 
 // Initialise request object
 $rawRequestPath = system_webutils_Urls::getCurrentRequestUri();
 $requestPathElements =
-	system_web_Services::getInstance()->getRouter()->splitRequestPath($rawRequestPath);
+	system_web_Services::instance()->getRouter()->splitRequestPath($rawRequestPath);
 $request->setRawPath($rawRequestPath);
 $request->setHandlerPath($requestPathElements);
 $request->setArguments($_GET);
 $request->setCommandArguments($_POST);
 
 // Obtain request handler
-$requestHandler = system_web_Services::getInstance()
+$requestHandler = system_web_Services::instance()
 	->getRouter()->findHandlerAndUpdateRequest($request);
 
 // Unset the request object reference, to avoid global var

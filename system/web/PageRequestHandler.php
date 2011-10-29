@@ -11,11 +11,11 @@ abstract class system_web_PageRequestHandler extends system_web_RequestHandler
     public function handle()
     {
         // Let handler set up controllers and other page settings
-        $this->configurePage(system_web_Services::getInstance()->getPage());
+        $this->configurePage(system_web_Services::instance()->getPage());
         
         // Execute any commands issued by the client
         $controllersOnPage =
-            system_web_Services::getInstance()->getPage()->getControllers();
+            system_web_Services::instance()->getPage()->getControllers();
         foreach ($controllersOnPage as $controller) {
         	$controller->handleActions();
         }
@@ -41,6 +41,6 @@ abstract class system_web_PageRequestHandler extends system_web_RequestHandler
 	 */
 	public function renderResponse()
 	{
-		system_web_Services::getInstance()->getPage()->render();
+		system_web_Services::instance()->getPage()->render();
 	}
 }

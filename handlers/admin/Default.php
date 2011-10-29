@@ -25,7 +25,7 @@ class handlers_admin_Default extends system_web_PageRequestHandler
 		///////  THIS CODE SHOULD BE IN SOME CONTROLLER  ////////////
 	
 		// Obtain all tasks from db and build up mark-up
-		$db = system_core_Services::getInstance()->getDb();
+		$db = system_core_Services::instance()->getDb();
 		$allTasks = $db->runQueryAndReturnAllRows('SELECT * FROM task');
 		$numTasks = count($allTasks);
 		

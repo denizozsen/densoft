@@ -19,13 +19,13 @@ class handlers_Default extends system_web_PageRequestHandler
 		
 		$navController =
 			new modules_navigation_NavigationLinksController(null,
-				system_web_Services::getInstance()->getRequest());
+				system_web_Services::instance()->getRequest());
 		$page->addController(system_web_PageRegion::MAIN_NAV, $navController);
 	
 		///////  THIS CODE SHOULD BE IN SOME CONTROLLER  ////////////
 	
 		// Obtain all tasks from db and build up mark-up
-		$db = system_core_Services::getInstance()->getDb();
+		$db = system_core_Services::instance()->getDb();
 		$allTasks = $db->runQueryAndReturnAllRows('SELECT * FROM task');
 		$numTasks = count($allTasks);
 		
