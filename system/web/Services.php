@@ -19,11 +19,28 @@ class system_web_Services
 	 */
 	public static function instance()
 	{
-		if (is_null(self::$instance)) {
-			self::$instance = new self();
+		if (self::$instance == null) {
+			throw new Exception(
+				'system_web_Services instance not yet set. Set it using setInstance(...) in boostrapper code.');
 		}
-
+		
 		return self::$instance;
+	}
+	
+	/**
+	 * Sets the system_web_Services instance to be used.
+	 *
+	 * @param system_web_Services $instance the configuration instance to be
+	 *        used
+	 */
+	public static function setInstance($instance)
+	{
+	    // Null value means use default instance
+	    if (is_null($instance)) {
+	        $instance = new self();
+	    }
+	    
+	    self::$instance = $instance;
 	}
 	
 	public function getRouter()

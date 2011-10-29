@@ -21,7 +21,7 @@ abstract class Configuration
 	{
 		if (self::$instance == null) {
 			throw new Exception(
-				'Configuration instance not yet set. Set it using setInstance(...) from within the boostrapper code.');
+				'Configuration instance not yet set. Set it using setInstance(...) in boostrapper code.');
 		}
 		
 		return self::$instance;

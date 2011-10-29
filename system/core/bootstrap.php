@@ -34,6 +34,10 @@ if (strpos($lowercaseServerName, strtolower('local')) === 0) {
 }
 unset($lowercaseServerName);
 
+// Set default Services instances (by passing null to setInstance)
+system_core_Services::setInstance(null);
+system_web_Services::setInstance(null);
+
 // Set timezone
 date_default_timezone_set(Configuration::instance()->timezone());
 

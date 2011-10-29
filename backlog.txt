@@ -12,11 +12,6 @@ TO DO
   -> SiteConfiguration should have a siteMode() method that allows finding
      out whether the site is currently running on LOCAL, TEST, LIVE, etc.
   -> DatabaseConfiguration can have sub-classes LiveDbConfig, LocalDbConfig, etc
-- Move service instantiation (e.g. Database, MasterRepository, Router, Request)
-  out of Configuration and into the respective Services class
-  (system_core_Services or web_Services). Instantiate the Services classes from
-  within the bootstrapper code to allow for different Services implementations
-  (e.g. for mocking in unit tests).
 
 - Create Response
 - Create CachedRepository
@@ -24,6 +19,11 @@ TO DO
 
 
 DONE
+- Move service instantiation (e.g. Database, MasterRepository, Router, Request)
+  out of Configuration and into the respective Services class
+  (system_core_Services or web_Services). Instantiate the Services classes from
+  within the bootstrapper code to allow for different Services implementations
+  (e.g. for mocking in unit tests).
 - Make default error pages work (e.g. for invalid image paths)
 - Create PageRequestHandler
 - Create RequestHandler
