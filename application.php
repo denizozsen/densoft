@@ -1,38 +1,7 @@
 <?php
 
-//// Bootstrap logic
-
-// Include path
-set_include_path($_SERVER['DOCUMENT_ROOT']);
-
-// Set up autoload handler function
-include 'autoload.php';
-
-// Use configuration appropriate for current environment
-$lowercaseServerName = strtolower($_SERVER['SERVER_NAME']);
-if (strpos($lowercaseServerName, strtolower('local')) === 0) {
-	Configuration::setInstance(new config_LocalConfiguration());
-} elseif (strpos($lowercaseServerName, strtolower('test')) === 0) {
-	Configuration::setInstance(new config_TestConfiguration());
-} else {
-	Configuration::setInstance(new config_LiveConfiguration());
-}
-unset($lowercaseServerName);
-
-// Use default Services instances (by passing null to setInstance)
-system_core_Services::setInstance(null);
-system_web_Services::setInstance(null);
-
-// Use configured timezone
-date_default_timezone_set(Configuration::instance()->timezone());
-
-// Set up error and exception handlers
-include 'errorhandlers.php';
-
-
-/////////////////////////////
-
-//// Application logic
+// Bootstrap
+include 'bootstrap.php';
 
 // Obtain the request object
 $request = system_web_Services::instance()->getRequest();
@@ -46,12 +15,24 @@ $request->setHandlerPath($requestPathElements);
 $request->setArguments($_GET);
 $request->setCommandArguments($_POST);
 
-// Obtain request handler
-$requestHandler = system_web_Services::instance()
-	->getRouter()->findHandlerAndUpdateRequest($request);
+// Obtain request handler path
+$requestHandlerData = system_web_Services::instance()
+	->getRouter()->getHandlerDataAndCompleteRequest($request);
 
-// Unset the request object reference, to avoid global var
+// Include additional bootstrapper, if it exists
+if (file_exists($requestHandlerData['dir'] . 'bootstrap.php')) {
+    include $requestHandlerData['dir'] . 'bootstrap.php';
+}
+
+// Instantiate request handler and pass it the request object
+$requestHandlerClassName = $requestHandlerData['class'];
+$requestHandler = new $requestHandlerClassName();
+$requestHandler->setRequest($request);
+
+// Unset variables that are no longer necessary, to avoid global variables
 unset($request);
+unset($requestHandlerData);
+unset($requestHandlerClassName);
 
 // Let request handler handle the request
 $requestHandler->handle();

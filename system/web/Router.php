@@ -23,13 +23,15 @@ class system_web_Router
 		return $urlElements;
 	}
 	
-	public function findHandlerAndUpdateRequest(system_web_Request $request)
+	public function getHandlerDataAndCompleteRequest(system_web_Request $request)
 	{
-		$handler = null;
+		$handlerClassName = null;
+		$handlerDir       = null;
 		
 		// Handle root path
 		if ($request->getRawPath() == '/') {
-			$handler = $this->getDefaultHandler();
+			$handlerClassName = $this->getDefaultHandlerClassName();
+			$handlerDir = Configuration::instance()->handlersPrefix() . '/';
 		}
 		
 		// Handle non-root path
@@ -45,8 +47,8 @@ class system_web_Router
 				$handlerPathCandidate = strtolower($handlerPathCandidate) . $element;
 				$handlerClassNameCandidate = strtolower($handlerClassNameCandidate) . '_' . $element;
 				if (is_file("{$handlerPathCandidate}.php")) {
-					//$handlerClassName = "handlers_{$element}";
-					$handler = new $handlerClassNameCandidate();
+					$handlerClassName = $handlerClassNameCandidate;
+					$handlerDir = dirname($handlerPathCandidate);
 					$request->setHandlerPath($handlerPathCandidate);
 					$request->setArguments( array_merge(
 						array_slice($handlerPathElements, $i+1),
@@ -59,26 +61,22 @@ class system_web_Router
 		}
 		
 		// Handle case where no appropriate handler is found => 404
-        if (null == $handler) {
-            $handler = $this->getErrorHandler();
+        if (null == $handlerClassName) {
+            $handlerClassName = $this->getErrorHandlerClassName();
+            $handlerDir = Configuration::instance()->handlersPrefix() . '/';
         }
 		
-        // Pass request object to handler
-		$handler->setRequest($request);
-		
-		return $handler;
+		return array('class' => $handlerClassName, 'dir' => $handlerDir);
 	}
 	
-	private function getDefaultHandler()
+	private function getDefaultHandlerClassName()
 	{
-		$handlerClassName = 'handlers_' . Configuration::instance()->defaultHandlerName();
-		return new $handlerClassName();
+		return 'handlers_' . Configuration::instance()->defaultHandlerName();
 	}
 	
-	private function getErrorHandler()
+	private function getErrorHandlerClassName()
 	{
-		$handlerClassName = 'handlers_' . Configuration::instance()->errorHandlerName();
-		return new $handlerClassName();
+		return 'handlers_' . Configuration::instance()->errorHandlerName();
 	}
 	
 	/**
