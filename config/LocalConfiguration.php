@@ -7,46 +7,38 @@
  */
 class config_LocalConfiguration extends Configuration
 {
-	const INCLUDE_PATH = '/Shared/sites/densoft';
-	const ROOT_URL     = '/';
-	const DB_SERVER    = '127.0.0.1';
-	const DB_USERNAME  = 'homemon';
-	const DB_PASSWORD  = 'R666Xing';
-	const DB_NAME      = 'homemon';
-	const TIMEZONE     = 'Indian/Mahe';
-
 	public function includePath()
 	{
-		return self::INCLUDE_PATH;
+		return '/Shared/sites/densoft';
 	}
 
 	public function rootUrl()
 	{
-		return self::ROOT_URL;
+		return '/';
 	}
 	
 	public function dbServer()
 	{
-		return self::DB_SERVER;
+		return '127.0.0.1';
 	}
 
 	public function dbUserName()
 	{
-		return self::DB_USERNAME;
+		return 'densoft';
 	}
 
 	public function dbPassword()
 	{
-		return self::DB_PASSWORD;
+		return 'densoft___';
 	}
 
 	public function dbName()
 	{
-		return self::DB_NAME;
+		return 'densoft';
 	}
 	
 	public function timezone()
 	{
-	    return self::TIMEZONE;
+	    return 'Indian/Mahe';
 	}
 }

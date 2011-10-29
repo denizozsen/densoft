@@ -7,46 +7,38 @@
  */
 class config_TestConfiguration extends Configuration
 {
-	const INCLUDE_PATH = '/sharedfiles/sites/test.densoft.mu';
-	const ROOT_URL     = '/';
-	const DB_SERVER    = 'localhost';
-	const DB_USERNAME  = 'homemon';
-	const DB_PASSWORD  = 'R666Xing';
-	const DB_NAME      = 'homemon';
-	const TIMEZONE     = 'Europe/London';
-	
 	public function includePath()
 	{
-		return self::INCLUDE_PATH;
+		return '/sharedfiles/sites/test.densoft.mu';
 	}
 
 	public function rootUrl()
 	{
-		return self::ROOT_URL;
+		return '/';
 	}
 	
 	public function dbServer()
 	{
-		return self::DB_SERVER;
+		return 'localhost';
 	}
 
 	public function dbUserName()
 	{
-		return self::DB_USERNAME;
+		return 'densoft';
 	}
 
 	public function dbPassword()
 	{
-		return self::DB_PASSWORD;
+		return 'densoft___';
 	}
 
 	public function dbName()
 	{
-		return self::DB_NAME;
+		return 'densoft';
 	}
 	
 	public function timezone()
 	{
-	    return self::TIMEZONE;
+	    return 'Europe/London';
 	}
 }

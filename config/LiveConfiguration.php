@@ -7,46 +7,38 @@
  */
 class config_LiveConfiguration extends Configuration
 {
-	const INCLUDE_PATH = '/insert/path/to/docroot/here';
-	const ROOT_URL     = '/';
-	const DB_SERVER    = '';
-	const DB_USERNAME  = '';
-	const DB_PASSWORD  = '';
-	const DB_NAME      = '';
-	const TIMEZONE     = 'Europe/London';
-	
 	public function includePath()
 	{
-		return self::INCLUDE_PATH;
+		return '/insert/path/to/docroot/here';
 	}
 
 	public function rootUrl()
 	{
-		return self::ROOT_URL;
+		return '/';
 	}
 	
 	public function dbServer()
 	{
-		return self::DB_SERVER;
+		return '';
 	}
 
 	public function dbUserName()
 	{
-		return self::DB_USERNAME;
+		return '';
 	}
 
 	public function dbPassword()
 	{
-		return self::DB_PASSWORD;
+		return '';
 	}
 
 	public function dbName()
 	{
-		return self::DB_NAME;
+		'';
 	}
 	
 	public function timezone()
 	{
-	    return self::TIMEZONE;
+	    return 'Europe/London';
 	}
 }
