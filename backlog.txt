@@ -1,9 +1,5 @@
 TO DO
 
-- Change how Configuration works:
-  -> make each configuration setting a method, e.g. handlersPrefix(),
-     defaultHandlerPath() or siteName()
-     -> This way each setting can be overridden by a Configuration sub-class
 - Make Configuration overridable:
   -> Each top-level folder ('sub-application') can have its own Configiuration sub-class
   -> Each Configuration sub-class (in a top-level folder) can choose its own
