@@ -1,5 +1,7 @@
 <?php
 
+//// Bootstrap logic
+
 // Include path
 set_include_path($_SERVER['DOCUMENT_ROOT']);
 
@@ -26,6 +28,7 @@ date_default_timezone_set(Configuration::instance()->timezone());
 
 // Set up error and exception handlers
 include 'errorhandlers.php';
+
 
 /////////////////////////////
 
