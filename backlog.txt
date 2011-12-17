@@ -4,6 +4,10 @@ TO DO
   file (similarly to how '/' causes handlers_Default to be used). E.g.:
   '/admin/' would use class handlers_admin_Default, assuming that no
   handlers_Admin class exists.
+- Create class RequestPatameters
+- Create mechanism for each controller to add all of its possible parameters,
+  to provice an API for getting/setting params easily
+- Create mechanism for each controller to make certain params 'sticky'
 - Split Configuration into:
   1) SiteConfiguration     (site settings, e.g. include path and timezone)
   2) DatabaseConfiguration (db connection settings)
@@ -14,8 +18,8 @@ TO DO
   -> DatabaseConfiguration can have sub-classes LiveDbConfig, LocalDbConfig, etc
   -> Think about all this a bit more...
 
-- Create Response
-- Create CachedRepository
+- Create class Response
+- Create class CachedRepository
   -> two choices as cache: 1) request-level cache (context) 2) real cache (memcache)
 
 
