@@ -7,11 +7,6 @@
  */
 class config_LiveConfiguration extends Configuration
 {
-	public function includePath()
-	{
-		return '/insert/path/to/docroot/here';
-	}
-
 	public function rootUrl()
 	{
 		return '/';

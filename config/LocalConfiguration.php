@@ -7,11 +7,6 @@
  */
 class config_LocalConfiguration extends Configuration
 {
-	public function includePath()
-	{
-		return '/Shared/sites/densoft';
-	}
-
 	public function rootUrl()
 	{
 		return '/';

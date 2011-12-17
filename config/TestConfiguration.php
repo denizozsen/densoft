@@ -7,11 +7,6 @@
  */
 class config_TestConfiguration extends Configuration
 {
-	public function includePath()
-	{
-		return '/sharedfiles/sites/test.densoft.mu';
-	}
-
 	public function rootUrl()
 	{
 		return '/';
