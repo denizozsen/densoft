@@ -10,7 +10,7 @@ class modules_navigation_model_Link
 	public function __construct($url, $title, $active = false, $children = array())
 	{
 		foreach($children as $child) {
-			if (!($child instanceof NavigationLink)) {
+			if (!($child instanceof modules_navigation_model_Link)) {
 				throw new Exception('children must be of type ' . get_class() . '.'
 					. ' Child was of type ' . get_class($child));
 			}
