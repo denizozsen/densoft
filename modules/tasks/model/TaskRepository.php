@@ -36,13 +36,14 @@ class modules_tasks_model_TaskRepository implements system_core_Repository
 		
 		$taskQueryResult = $db->runQuery("
 			SELECT id, name, description, start_date
-				FROM task
-				WHERE id = {$key}");
+				FROM task");
 		
 		$allTasks = array();
 		
-		while($taskRow = $db->fetchNextArray($taskQueryResult)) {
+		$taskRow = $db->fetchNextArray($taskQueryResult);
+		while(false !== $taskRow) {
 			$allTasks[] = self::createTaskFromRecord($taskRow);
+			$taskRow = $db->fetchNextArray($taskQueryResult);
 		}
 		
 		return $allTasks;
