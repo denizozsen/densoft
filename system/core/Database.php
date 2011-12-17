@@ -78,8 +78,11 @@ class system_core_Database
 		}
 		
 		$rows = array();
-		while($row = $this->fetchNextArray($result)) {
+		
+		$row = $this->fetchNextArray($result);
+		while(false !== $row) {
 			$rows[] = $row;
+		    $row = $this->fetchNextArray($result);
 		}
 		
 		return $rows;
