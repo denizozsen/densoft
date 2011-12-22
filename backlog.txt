@@ -4,10 +4,11 @@ TO DO
   file (similarly to how '/' causes handlers_Default to be used). E.g.:
   '/admin/' would use class handlers_admin_Default, assuming that no
   handlers_Admin class exists.
-- Create class RequestPatameters
 - Create mechanism for each controller to add all of its possible parameters,
   to provice an API for getting/setting params easily
+  -> use RequestParameters class
 - Create mechanism for each controller to make certain params 'sticky'
+  -> use RequestParameters class
 - Split Configuration into:
   1) SiteConfiguration     (site settings, e.g. include path and timezone)
   2) DatabaseConfiguration (db connection settings)
