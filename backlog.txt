@@ -1,5 +1,9 @@
 TO DO
 
+- Make a View class that can be assigned view variables, which are then used
+  by the view/template to render (i.e. echo) variable content
+- Create a standard controller ('standard' meaning part of the framework) for
+  the site logo
 - Run default handler when request path maps to a directory, rather than a
   file (similarly to how '/' causes handlers_Default to be used). E.g.:
   '/admin/' would use class handlers_admin_Default, assuming that no
