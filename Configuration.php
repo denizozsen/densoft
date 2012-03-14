@@ -48,7 +48,7 @@ abstract class Configuration
 
 	public function themePath() { return 'themes/basic/theme.css'; }
 	
-	public function companyLogoPath() { return 'themes/basic/company_logo.gif'; }
+	public function logoPath() { return 'themes/basic/company_logo.gif'; }
 
 	public function footerHtml() { return 'Copyright DenSoft (c) 2011'; }
 		

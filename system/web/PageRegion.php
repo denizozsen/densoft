@@ -7,7 +7,7 @@ class system_web_PageRegion
 {
 	const CONTENT      = 0;
 	const HEADING      = 1;
-	const SITE_LOGO    = 2;
+	const LOGO         = 2;
 	const TOP_BAR      = 3;
 	const BREAD_CRUMBS = 4;
 	const MAIN_NAV     = 5;

@@ -7,10 +7,10 @@ class handlers_Gpp extends system_web_PageRequestHandler
 		$page->setTemplate('templates/default.tpl');
 		$page->setTitle('Good Programming Practices - ' . Configuration::instance()->siteName());
 		$page->setMainHeading('Good Programming Practices');
-		if (!is_null(Configuration::instance()->companyLogoPath())) {
+		if (!is_null(Configuration::instance()->logoPath())) {
 			$rootUrl = Configuration::instance()->rootUrl();
 			$page->setSiteLogo(sprintf('<a href="%s"><img src="%s" /></a>',
-				$rootUrl, $rootUrl . Configuration::instance()->companyLogoPath()));
+				$rootUrl, $rootUrl . Configuration::instance()->logoPath()));
 		}
 		if (!is_null(Configuration::instance()->footerHtml())) {
 			$page->addController(system_web_PageRegion::FOOTER,

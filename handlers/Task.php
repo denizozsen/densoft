@@ -22,12 +22,12 @@ class handlers_Task extends system_web_PageRequestHandler
         $page->addController(system_web_PageRegion::HEADING, new system_mvc_StaticController("Task: '{$taskName}'"));
         
 		// Site Logo
-		if (!is_null(Configuration::instance()->companyLogoPath())) {
+		if (!is_null(Configuration::instance()->logoPath())) {
 			$rootUrl = Configuration::instance()->rootUrl();
 		    $page->addController(
-		        system_web_PageRegion::SITE_LOGO,
+		        system_web_PageRegion::LOGO,
 		        new system_mvc_StaticController(
-		            sprintf('<a href="%s"><img src="%s" /></a>', $rootUrl, $rootUrl . Configuration::instance()->companyLogoPath())
+		            sprintf('<a href="%s"><img src="%s" /></a>', $rootUrl, $rootUrl . Configuration::instance()->logoPath())
 		        )
 		    );
 		}

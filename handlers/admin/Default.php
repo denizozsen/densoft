@@ -7,12 +7,12 @@ class handlers_admin_Default extends system_web_PageRequestHandler
 		$page->setTemplate('templates/default.tpl');
 		$page->setTitle('Task List - ' . Configuration::instance()->siteName());
 		$page->addController(system_web_PageRegion::HEADING, new system_mvc_StaticController('Task List'));
-		if (!is_null(Configuration::instance()->companyLogoPath())) {
+		if (!is_null(Configuration::instance()->logoPath())) {
 			$rootUrl = Configuration::instance()->rootUrl();
 		    $page->addController(
-		        system_web_PageRegion::SITE_LOGO,
+		        system_web_PageRegion::LOGO,
 		        new system_mvc_StaticController(
-		            sprintf('<a href="%s"><img src="%s" /></a>', $rootUrl, $rootUrl . Configuration::instance()->companyLogoPath())
+		            sprintf('<a href="%s"><img src="%s" /></a>', $rootUrl, $rootUrl . Configuration::instance()->logoPath())
 		        )
 		    );
 		}

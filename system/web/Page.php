@@ -24,7 +24,7 @@ class system_web_Page extends system_mvc_View
 		$this->regionControllers = array();
 		$this->regionControllers[system_web_PageRegion::CONTENT]      = new system_mvc_CompositeController();
 		$this->regionControllers[system_web_PageRegion::HEADING]      = new system_mvc_CompositeController();
-		$this->regionControllers[system_web_PageRegion::SITE_LOGO]    = new system_mvc_CompositeController();
+		$this->regionControllers[system_web_PageRegion::LOGO]         = new system_mvc_CompositeController();
 		$this->regionControllers[system_web_PageRegion::TOP_BAR]      = new system_mvc_CompositeController();
 		$this->regionControllers[system_web_PageRegion::BREAD_CRUMBS] = new system_mvc_CompositeController();
 		$this->regionControllers[system_web_PageRegion::MAIN_NAV]     = new system_mvc_CompositeController();
@@ -97,7 +97,7 @@ class system_web_Page extends system_mvc_View
 			'headElement' => $this->generateHeadElement(),
 			'content'     => $this->regionControllers[system_web_PageRegion::CONTENT],
 		    'heading'     => $this->regionControllers[system_web_PageRegion::HEADING],
-			'logo'    => $this->regionControllers[system_web_PageRegion::SITE_LOGO],
+			'logo'        => $this->regionControllers[system_web_PageRegion::LOGO],
 		    'topBar'      => $this->regionControllers[system_web_PageRegion::TOP_BAR],
 		    'breadCrumbs' => $this->regionControllers[system_web_PageRegion::BREAD_CRUMBS],
 		    'mainNav'     => $this->regionControllers[system_web_PageRegion::MAIN_NAV],
