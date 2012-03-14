@@ -20,7 +20,7 @@ abstract class system_mvc_Controller implements system_mvc_Renderable
      * Renders the view(s) managed by this controller. The base class
      * implementation of this method does nothing.
      */
-    public function render(array $renderArgs = array())
+    public function render()
     {
         // default behaviour: render nothing
     }

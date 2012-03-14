@@ -8,7 +8,13 @@
 class system_mvc_View implements system_mvc_Renderable
 {
 	private $templateFilePath;
+	private $viewVariablesArray;
 	
+	public function __construct()
+	{
+	    $this->viewVariablesArray = array();
+	}
+		
 	/**
 	 * Sets the template that will be used when rendering the view.
 	 * 
@@ -28,18 +34,54 @@ class system_mvc_View implements system_mvc_Renderable
 	}
 	
 	/**
-	 * Renders the view by making each element in the given renderArgs array
-	 * a local variable (and therefore accessible to the template) and then
-	 * including the template.
+	 * Adds the variables in the given associative array to the View's variable
+	 * collection.
 	 * 
-	 * @param array $renderArgs the arguments to be passed to the template
+	 * @param array $variablesArray the variables to add to this View.
 	 */
-	public function render(array $renderArgs = array())
+	public function addViewVariables($variablesArray)
 	{
-		// Save data required by template into local variables, which will
-		// be accessible by the template (included below)
-		extract($renderArgs);
-		
+	    $this->viewVariablesArray =
+	        array_merge($this->viewVariablesArray, $variablesArray);
+	}
+	
+	/**
+	 * Sets this View's variable collection.
+	 * 
+	 * @param array $viewVariablesArray an associative array
+	 */
+	public function setViewVariables($viewVariablesArray)
+	{
+	    $this->viewVariablesArray = $viewVariablesArray;
+	}
+	
+	/**
+	 * Returns this View's variable collection as an associative array.
+	 * 
+	 * @return array
+	 */
+	public function getViewVariables()
+	{
+	    return $this->viewVariablesArray;
+	}
+	
+	// Magic get method, used by template to retrieve view variables
+	private function __get($variableName)
+	{
+	    return $this->viewVariablesArray[$variableName];
+	}
+	
+	// Magic set method, used by View client to assign view variables
+	private function __set($variableName, $variableValue)
+	{
+	    $this->viewVariablesArray[$variableName] = $variableValue;
+	}
+	
+	/**
+	 * Renders the View by including the template that was set.
+	 */
+	public function render()
+	{
 		// Render view, based on template
 	    include($this->templateFilePath);
 	}

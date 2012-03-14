@@ -1,7 +1,5 @@
 TO DO
 
-- Make a View class that can be assigned view variables, which are then used
-  by the view/template to render (i.e. echo) variable content
 - Create a standard controller ('standard' meaning part of the framework) for
   the site logo
 - Run default handler when request path maps to a directory, rather than a
@@ -29,6 +27,8 @@ TO DO
 
 
 DONE
+- Make a View class that can be assigned view variables, which are then used
+  by the view/template to render (i.e. echo) variable content
 - Create page regions (in system_web_PageRegion) for site logo, breadcrumbs and
   main heading
 - Run bootstrap.php in handler directory, in addition to running main bootstrap.php

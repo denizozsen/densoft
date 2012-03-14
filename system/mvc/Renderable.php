@@ -9,8 +9,6 @@ interface system_mvc_Renderable
 {
 	/**
 	 * Renders the Renderable.
-	 * 
-	 * @param array $renderArgs the arguments passed to the rendering algorithm
 	 */
-	function render(array $renderArgs = array());
+	function render();
 }

@@ -19,6 +19,8 @@ class system_web_Page extends system_mvc_View
 
 	public function __construct()
 	{
+	    parent::__construct();
+	    
 		$this->regionControllers = array();
 		$this->regionControllers[system_web_PageRegion::CONTENT]      = new system_mvc_CompositeController();
 		$this->regionControllers[system_web_PageRegion::HEADING]      = new system_mvc_CompositeController();
@@ -87,24 +89,24 @@ class system_web_Page extends system_mvc_View
 		$this->javascriptList[] = $javascript;
 	}
 
-	public function render(array $renderArgs = array())
+	public function render()
 	{
-		// Save data required by template into local variables, which will
-		// be accessible by the template (included below)
-		$pageRenderArgs = array(
+		// Assign the head data and all controllers to view variables, which
+		// will be accessible by the template rendered below
+		$this->addViewVariables(array(
 			'headElement' => $this->generateHeadElement(),
 			'content'     => $this->regionControllers[system_web_PageRegion::CONTENT],
 		    'heading'     => $this->regionControllers[system_web_PageRegion::HEADING],
-			'siteLogo'    => $this->regionControllers[system_web_PageRegion::SITE_LOGO],
+			'logo'    => $this->regionControllers[system_web_PageRegion::SITE_LOGO],
 		    'topBar'      => $this->regionControllers[system_web_PageRegion::TOP_BAR],
 		    'breadCrumbs' => $this->regionControllers[system_web_PageRegion::BREAD_CRUMBS],
 		    'mainNav'     => $this->regionControllers[system_web_PageRegion::MAIN_NAV],
 			'leftColumn'  => $this->regionControllers[system_web_PageRegion::LEFT_COLUMN],
 		    'rightColumn' => $this->regionControllers[system_web_PageRegion::RIGHT_COLUMN],
 		    'footer'      => $this->regionControllers[system_web_PageRegion::FOOTER]
-		);
+		));
 	    
-	    parent::render($pageRenderArgs);
+	    parent::render();
 	}
 	
 	private function generateHeadElement()

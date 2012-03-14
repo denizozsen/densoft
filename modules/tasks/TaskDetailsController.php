@@ -82,7 +82,7 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
     	}
     }
     
-    public function render(array $renderArgs = array())
+    public function render()
     {
         $view = new system_mvc_View();
         
@@ -99,8 +99,8 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
             break;
         }
         
-        $renderArgs['model'] = $this->model;
-        $view->render($renderArgs);
+        $view->model = $this->model;
+        $view->render();
     }
     
     private function getTaskIdFromRequest()
