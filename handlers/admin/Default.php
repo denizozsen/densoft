@@ -6,11 +6,15 @@ class handlers_admin_Default extends system_web_PageRequestHandler
 	{
 		$page->setTemplate('templates/default.tpl');
 		$page->setTitle('Task List - ' . Configuration::instance()->siteName());
-		$page->setMainHeading('Task List');
+		$page->addController(system_web_PageRegion::HEADING, new system_mvc_StaticController('Task List'));
 		if (!is_null(Configuration::instance()->companyLogoPath())) {
 			$rootUrl = Configuration::instance()->rootUrl();
-			$page->setSiteLogo(sprintf('<a href="%s"><img src="%s" /></a>',
-				$rootUrl, $rootUrl . Configuration::instance()->companyLogoPath()));
+		    $page->addController(
+		        system_web_PageRegion::SITE_LOGO,
+		        new system_mvc_StaticController(
+		            sprintf('<a href="%s"><img src="%s" /></a>', $rootUrl, $rootUrl . Configuration::instance()->companyLogoPath())
+		        )
+		    );
 		}
 		if (!is_null(Configuration::instance()->footerHtml())) {
 			$page->addController(system_web_PageRegion::FOOTER,

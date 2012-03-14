@@ -8,7 +8,7 @@
 	<div id="innerbody">
 
 		<div id="sitelogo">
-			<?php echo $siteLogo ?>
+			<?php echo $siteLogo->render() ?>
 		</div>
 
 		<div id="topbar">
@@ -16,11 +16,11 @@
 		</div>
 
 		<div id="breadcrumbs">
-			<?php echo $breadcrumbs ?>
+			<?php echo $breadCrumbs->render() ?>
 		</div>
 
 		<div id="heading">
-			<h1><?php echo $mainHeading ?></h1>
+			<h1><?php echo $heading->render() ?></h1>
 		</div>
 
 		<div id="content">

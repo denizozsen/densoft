@@ -1,7 +1,5 @@
 TO DO
 
-- Create page regions (in system_web_PageRegion) for site logo, breadcrumbs and
-  main heading
 - Run default handler when request path maps to a directory, rather than a
   file (similarly to how '/' causes handlers_Default to be used). E.g.:
   '/admin/' would use class handlers_admin_Default, assuming that no
@@ -27,6 +25,8 @@ TO DO
 
 
 DONE
+- Create page regions (in system_web_PageRegion) for site logo, breadcrumbs and
+  main heading
 - Run bootstrap.php in handler directory, in addition to running main bootstrap.php
 - Move service instantiation (e.g. Database, MasterRepository, Router, Request)
   out of Configuration and into the respective Services class

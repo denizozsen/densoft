@@ -22,7 +22,9 @@ class system_web_Page extends system_mvc_View
 		$this->regionControllers = array();
 		$this->regionControllers[system_web_PageRegion::CONTENT]      = new system_mvc_CompositeController();
 		$this->regionControllers[system_web_PageRegion::HEADING]      = new system_mvc_CompositeController();
+		$this->regionControllers[system_web_PageRegion::SITE_LOGO]    = new system_mvc_CompositeController();
 		$this->regionControllers[system_web_PageRegion::TOP_BAR]      = new system_mvc_CompositeController();
+		$this->regionControllers[system_web_PageRegion::BREAD_CRUMBS] = new system_mvc_CompositeController();
 		$this->regionControllers[system_web_PageRegion::MAIN_NAV]     = new system_mvc_CompositeController();
 		$this->regionControllers[system_web_PageRegion::LEFT_COLUMN]  = new system_mvc_CompositeController();
 		$this->regionControllers[system_web_PageRegion::RIGHT_COLUMN] = new system_mvc_CompositeController();
@@ -69,21 +71,6 @@ class system_web_Page extends system_mvc_View
 	{
 		$this->title = $title;
 	}
-
-	public function setMainHeading($mainHeading)
-	{
-		$this->mainHeading = $mainHeading;
-	}
-
-	public function setSiteLogo($siteLogo)
-	{
-		$this->siteLogo = $siteLogo;
-	}
-	
-	public function setBreadcrumbs($breadcrumbs)
-	{
-		$this->breadcrumbs = $breadcrumbs;
-	}
 	
 	public function setThemeCss($themeCss)
 	{
@@ -105,17 +92,16 @@ class system_web_Page extends system_mvc_View
 		// Save data required by template into local variables, which will
 		// be accessible by the template (included below)
 		$pageRenderArgs = array(
-			'mainHeading' => $this->mainHeading,
-			'siteLogo'    => $this->siteLogo,
-			'breadcrumbs' => $this->breadcrumbs,
 			'headElement' => $this->generateHeadElement(),
 			'content'     => $this->regionControllers[system_web_PageRegion::CONTENT],
-		    'footer'      => $this->regionControllers[system_web_PageRegion::FOOTER],
 		    'heading'     => $this->regionControllers[system_web_PageRegion::HEADING],
-		    'leftColumn'  => $this->regionControllers[system_web_PageRegion::LEFT_COLUMN],
+			'siteLogo'    => $this->regionControllers[system_web_PageRegion::SITE_LOGO],
+		    'topBar'      => $this->regionControllers[system_web_PageRegion::TOP_BAR],
+		    'breadCrumbs' => $this->regionControllers[system_web_PageRegion::BREAD_CRUMBS],
 		    'mainNav'     => $this->regionControllers[system_web_PageRegion::MAIN_NAV],
+			'leftColumn'  => $this->regionControllers[system_web_PageRegion::LEFT_COLUMN],
 		    'rightColumn' => $this->regionControllers[system_web_PageRegion::RIGHT_COLUMN],
-		    'topBar'      => $this->regionControllers[system_web_PageRegion::TOP_BAR]
+		    'footer'      => $this->regionControllers[system_web_PageRegion::FOOTER]
 		);
 	    
 	    parent::render($pageRenderArgs);

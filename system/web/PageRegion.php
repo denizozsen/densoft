@@ -7,11 +7,13 @@ class system_web_PageRegion
 {
 	const CONTENT      = 0;
 	const HEADING      = 1;
-	const TOP_BAR      = 2;
-	const MAIN_NAV     = 3;
-	const LEFT_COLUMN  = 4;
-	const RIGHT_COLUMN = 5;
-	const FOOTER       = 6;
+	const SITE_LOGO    = 2;
+	const TOP_BAR      = 3;
+	const BREAD_CRUMBS = 4;
+	const MAIN_NAV     = 5;
+	const LEFT_COLUMN  = 6;
+	const RIGHT_COLUMN = 7;
+	const FOOTER       = 8;
 
 	// Prevent instantiation
 	private function __construct()

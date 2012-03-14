@@ -6,11 +6,15 @@ class handlers_Error extends system_web_PageRequestHandler
 	{
 		$page->setTemplate('templates/default.tpl');
 		$page->setTitle('Resource not found - ' . Configuration::instance()->siteName());
-		$page->setMainHeading('Resource not found');
+		$page->addController(system_web_PageRegion::HEADING, new system_mvc_StaticController('Resource not found'));
 		if (!is_null(Configuration::instance()->companyLogoPath())) {
 			$rootUrl = Configuration::instance()->rootUrl();
-			$page->setSiteLogo(sprintf('<a href="%s"><img src="%s" /></a>',
-				$rootUrl, $rootUrl . Configuration::instance()->companyLogoPath()));
+		    $page->addController(
+		        system_web_PageRegion::SITE_LOGO,
+		        new system_mvc_StaticController(
+		            sprintf('<a href="%s"><img src="%s" /></a>', $rootUrl, $rootUrl . Configuration::instance()->companyLogoPath())
+		        )
+		    );
 		}
 		if (!is_null(Configuration::instance()->footerHtml())) {
 			$page->addController(system_web_PageRegion::FOOTER,
