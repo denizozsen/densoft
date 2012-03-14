@@ -24,7 +24,7 @@ class system_mvc_View implements system_mvc_Renderable
 	 */
 	public function getTemplate()
 	{
-		return $this->templateFile;
+		return $this->templateFilePath;
 	}
 	
 	/**
