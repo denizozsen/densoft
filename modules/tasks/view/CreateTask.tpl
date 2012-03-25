@@ -7,7 +7,7 @@
         </li>
 		<li>
         	<label class="task_label" for="start_date">Start Date:</label>
-        	<input class="task_value" type="text" id="start_date" name="start_date" value="<?php echo date('d-m-Y'); ?>"></input><br />
+        	<input class="task_value" type="text" id="start_date" name="start_date" value="<?php echo date('Y-m-d'); ?>"></input><br />
         </li>
 		<li>
         	<label class="task_label" for="description">Description:</label>

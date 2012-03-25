@@ -17,7 +17,7 @@
         	<input type="hidden" name="id" value="<?php echo $this->model->getId() ?>"></input>
         	<input type="hidden" name="command" value="update"></input>    
         	<input type="submit" value="Save"></input>
-        	<input type="button" value="Cancel" onclick="window.location = '/task/?id=<?php echo $this->model->getId()?>'"></input>
+        	<input type="button" value="Cancel" onclick="window.location = '/task/?task_id=<?php echo $this->model->getId()?>'"></input>
 		</li>
 	</ul>
 
