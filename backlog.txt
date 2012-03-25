@@ -1,5 +1,16 @@
 TO DO
 
+- Rename application.php (in root directory) and add a directory named 'app',
+  which will be used by for application-specific classes.
+  Note 1: the modules folder is different - it's used for modules that can be
+          reused by several different application, and therefore can simply be
+          dropped into any application and should just work.
+  Note 2: We could add another class autoloader that will load classes within
+          the app directory, without the need to use the 'app_' prefix in the
+          class names.
+- Remove PageRegion constants concept and make it possible to add any
+  arbitrarily named variables to the system_web_Page, which are then accessible
+  to the main template as $this->[variable_name].
 - Redirect to correct URL, if URL misses a trailing slash (before query string)
 - Redirect to correct URL, if URL's capitalisation is inconsistent with handler
   file.
