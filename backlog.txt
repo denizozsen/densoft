@@ -1,5 +1,9 @@
 TO DO
 
+- Change the service classes (e.g. system_web_Services) to work with magic
+  methods and to be either sub-classable or to make it possible to register
+  service locators to them (preferable, since this would allow adding any number
+  of service locators, rather than just sub-classing with a single class).
 - Remove PageRegion constants concept and make it possible to add any
   arbitrarily named variables to the system_web_Page, which are then accessible
   to the main template as $this->[variable_name].
