@@ -11,11 +11,23 @@
  */
 function densoft_autoload($className)
 {
+    // Use pear class naming rule
 	$pathToClassFile = str_replace('_', '/', $className) . '.php';
+
+	// First try from root
 	if (file_exists($pathToClassFile)) {
 		require($pathToClassFile);
-	} else {
-		throw new system_core_ClassNotFoundException();
+		return;
 	}
+	
+	// Then try starting at level of app folder
+	$pathToClassFile = 'app/' . $pathToClassFile;
+	if(file_exists($pathToClassFile)) {
+	    require($pathToClassFile);
+		return;
+	}
+	
+	// No class found: throw exception
+	throw new system_core_ClassNotFoundException();
 }
 spl_autoload_register('densoft_autoload');
