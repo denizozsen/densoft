@@ -1,5 +1,8 @@
 TO DO
 
+- Redirect to correct URL, if URL misses a trailing slash (before query string)
+- Redirect to correct URL, if URL's capitalisation is inconsistent with handler
+  file.
 - Create a standard controller ('standard' meaning part of the framework) for
   the site logo
 - Run default handler when request path maps to a directory, rather than a
