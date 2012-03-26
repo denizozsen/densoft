@@ -14,7 +14,7 @@
         	<textarea style="height: 12em;" class="task_value" id="description" name="description"><?php echo $this->model->getDescription() ?></textarea><br />
 		</li>
 		<li>
-        	<input type="hidden" name="id" value="<?php echo $this->model->getId() ?>"></input>
+        	<input type="hidden" name="task_id" value="<?php echo $this->model->getId() ?>"></input>
         	<input type="hidden" name="command" value="update"></input>    
         	<input type="submit" value="Save"></input>
         	<input type="button" value="Cancel" onclick="window.location = '/task/?task_id=<?php echo $this->model->getId()?>'"></input>

@@ -77,8 +77,25 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
 	        	
 	        } elseif ('update' == $_POST['command']) {
 	            
+	        	$this->validateEditTaskRequest();
+	            $name = $_POST['name'];
+	            $description = $_POST['description'];
+	            $startDate = $_POST['start_date'];
+	            
+	        	$task = new modules_tasks_model_Task();
+	        	$task->setId($this->getTaskIdFromRequest());
+	        	$task->setName($name);
+	        	$task->setDescription($description);
+	        	$task->setStartDate($startDate);
+	            
+	        	$repo = new modules_tasks_model_TaskRepository();
+	        	$repo->saveChanges($task);
+	        	
+	        	system_web_Services::instance()->getRouter()->redirectTo(
+            		"task/?task_id={$task->getId()}");
+	        	
 	        } else {
-	            // TODO - log invalid command
+	            throw new Exception("Invalid command: {$_POST['command']}");
 	        }
     	}
     }
@@ -107,13 +124,13 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
     private function getTaskIdFromRequest()
     {
         // If task id is not specified, return -1 to  indicate create task form
-        if (!isset($_GET['task_id'])) {
+        if (!isset($_REQUEST['task_id'])) {
             return -1;
         }
         
         // Get task id argument
         // TODO - use the request argument mechanisms of class system_web_Request
-        $rawTaskId = $_GET['task_id'];
+        $rawTaskId = $_REQUEST['task_id'];
         
         // If task id argument is not an integer, redirect to home page
         if ((string)(int)$rawTaskId !== $rawTaskId) {
@@ -127,5 +144,10 @@ class modules_tasks_TaskDetailsController extends system_mvc_Controller
     private function validateCreateTaskRequest()
     {
     	// TODO - implement validateCreateTaskRequest()
+    }
+
+    private function validateEditTaskRequest()
+    {
+    	// TODO - implement validateEditTaskRequest()
     }
 }
